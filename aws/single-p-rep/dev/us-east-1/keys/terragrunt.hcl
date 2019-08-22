@@ -6,13 +6,9 @@ include {
   path = find_in_parent_folders()
 }
 
-locals {
-  name = "vpc"
-}
-
 inputs = {
-  generate_ssh_key = "false"
   name = "keypair"
-  ssh_public_key_path =
+  generate_ssh_key = "false"
+//  ssh_public_key_path = "" # Inherited
 }
 

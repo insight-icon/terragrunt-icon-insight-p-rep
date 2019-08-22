@@ -11,3 +11,5 @@ tracker_subdomain = "tracker"
 log_location_prefix = "logs"
 node_subdomain = "net"
 log_bucket = ""
+
+stage = ""
