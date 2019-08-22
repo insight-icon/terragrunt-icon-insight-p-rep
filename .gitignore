@@ -1,6 +1,18 @@
 .idea/
+
 /aws/modules/terraform-aws-icon-p-rep-node/
 /aws/modules/terraform-aws-icon-p-rep-sg/
 
 */account.tf
 
+
+_old/
+.idea/
+.pytest_cache
+
+*.tfstate/
+*.tfstate.backup
+*.tfplan
+
+.terragrunt-cache/
+.terraform/
