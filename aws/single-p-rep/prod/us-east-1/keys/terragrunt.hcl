@@ -1,18 +1,18 @@
 terraform {
-  source = "github.com/cloudposse/terraform-aws-key-pair.git?ref=0.4.0"
+//  source = "github.com/cloudposse/terraform-aws-key-pair.git?ref=0.4.0"
+  source = "github.com/robc-io/terraform-aws-icon-p-rep-keys.git"
 }
 
 include {
   path = find_in_parent_folders()
 }
 
-locals {
-  name = "vpc"
-}
+//inputs = {
+//  stage = "stage"
+//  name = "id_rsa"
+////  ssh_public_key_path = "" # Inherited
+//}
 
 inputs = {
-  generate_ssh_key = "false"
-  name = "keypair"
-  ssh_public_key_path =
+  resource_group = "keys"
 }
-
