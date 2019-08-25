@@ -1,6 +1,8 @@
 terraform {
-  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git?ref=0.0.1"
+//  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git?ref=0.0.1"
+  source = "../../../../modules/terraform-aws-icon-p-rep-node"
 }
+
 
 include {
   path = find_in_parent_folders()
@@ -8,6 +10,10 @@ include {
 
 dependency "vpc" {
   config_path = "../vpc"
+}
+
+dependency "sg" {
+  config_path = "../sg"
 }
 
 dependency "keys" {
@@ -21,6 +27,7 @@ inputs = {
   efs_directory = "/opt/data"
   resource_group = "ec2"
   volume_dir = ""
+  ebs_volume_size = 100
   root_volume_size = "20"
   instance_type = "m4.large"
   volume_path = "/dev/sdf"
@@ -28,5 +35,6 @@ inputs = {
   key_name = dependency.keys.outputs.key_name
   public_key = dependency.keys.outputs.public_key
 
-  subnet_id = dependency.vpc.outputs.subnet_id
+  security_groups = dependency.sg.outputs.security_group_ids
+  subnet_id = dependency.vpc.outputs.public_subnets[0]
 }
