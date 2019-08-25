@@ -1,6 +1,7 @@
 terraform {
 //  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git?ref=0.0.1"
-  source = "../../../../modules/terraform-aws-icon-p-rep-node"
+//  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git"
+  source = "../../../../../modules/terraform-aws-icon-p-rep-node"
 }
 
 
@@ -9,7 +10,7 @@ include {
 }
 
 dependency "vpc" {
-  config_path = "../vpc"
+  config_path = "../../network/vpc"
 }
 
 dependency "sg" {
