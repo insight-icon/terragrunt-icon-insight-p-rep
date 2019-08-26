@@ -8,15 +8,6 @@ terraform {
         "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("account.tfvars")}"
       ]
   }
-//  after_hook "copy_common_main_variables" {
-//      commands = ["init-from-module"]
-//      execute  = ["cp", "${get_parent_terragrunt_dir()}/common/common_variables.tf", "."]
-//  }
-//
-//  after_hook "copy_common_main_providers" {
-//      commands = ["init-from-module"]
-//      execute  = ["cp", "${get_parent_terragrunt_dir()}/common/common_providers.tf", "."]
-//  }
 }
 
 remote_state {

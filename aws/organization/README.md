@@ -4,6 +4,11 @@
 
 Immutable deployment of AWS Organization and associated accounts to support a multi-account security posture. 
 
+Setting up new accounts is a pain and involves unaudited manual steps to unseal properly.  The initial design of this 
+repo was done manually but in the future, best practices will be codified to unseal new accounts and setup proper 
+audit-trails and permissions. 
+
+
 ## Resources 
 
 - Liatrio's multi-account setup

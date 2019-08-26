@@ -8,6 +8,6 @@ include {
 
 inputs = {
   region = "us-east-1"
-  subdomain = "prep"
+  subdomain = "home"
 }
 
