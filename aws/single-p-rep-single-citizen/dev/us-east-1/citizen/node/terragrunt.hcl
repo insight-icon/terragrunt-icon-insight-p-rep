@@ -1,7 +1,7 @@
 terraform {
 //  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git?ref=0.0.1"
 //  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git"
-  source = "../../../../../modules/terraform-aws-icon-p-rep-node"
+  source = "../../../../../modules/terraform-aws-icon-citizen-node"
 }
 
 

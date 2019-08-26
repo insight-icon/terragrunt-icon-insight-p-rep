@@ -1,3 +1,9 @@
 {
-  "projects": {}
+  "projects": {
+    "aws/modules/terraform-aws-icon-p-rep-node": "https://github.com/robc-io/terraform-aws-icon-p-rep-node",
+    "aws/modules/terraform-aws-icon-p-rep-sg": "https://github.com/robc-io/terraform-aws-icon-p-rep-sg",
+    "aws/modules/terraform-aws-icon-p-rep-keys": "https://github.com/robc-io/terraform-aws-icon-p-rep-keys",
+    "aws/modules/terraform-aws-icon-citizen-node": "https://github.com/robc-io/terraform-aws-icon-citizen-node",
+    "aws/modules/terraform-aws-cloudfront-s3-acm": "https://github.com/robc-io/terraform-aws-cloudfront-s3-acm"
+  }
 }

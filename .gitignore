@@ -3,7 +3,7 @@
 /aws/modules/terraform-aws-icon-p-rep-node/
 /aws/modules/terraform-aws-icon-p-rep-sg/
 
-*/account.tf
+*account.tfvars
 
 
 _old/
@@ -16,3 +16,5 @@ _old/
 
 .terragrunt-cache/
 .terraform/
+/aws/modules/terraform-aws-icon-p-rep-keys/
+/aws/modules/terraform-aws-icon-citizen-node/
