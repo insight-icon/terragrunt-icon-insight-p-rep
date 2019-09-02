@@ -37,5 +37,6 @@ inputs = {
   public_key = dependency.keys.outputs.public_key
 
   security_groups = dependency.sg.outputs.security_group_ids
+
   subnet_id = dependency.vpc.outputs.public_subnets[0]
 }
