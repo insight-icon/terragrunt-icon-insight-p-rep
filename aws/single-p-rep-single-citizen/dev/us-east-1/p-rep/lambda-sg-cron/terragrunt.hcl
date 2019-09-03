@@ -18,6 +18,8 @@ dependency "sg" {
 
 inputs = {
   name = "lambda-sg-cron"
+  group = "p-rep"
+
   security_group_ids = dependency.sg.outputs.security_group_ids
   subnet_ids = dependency.vpc.outputs.public_subnets
 }

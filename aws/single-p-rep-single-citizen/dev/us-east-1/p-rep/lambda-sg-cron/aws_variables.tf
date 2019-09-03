@@ -8,6 +8,3 @@ variable "aws_allowed_account_ids" {
   type        = list
 }
 
-variable "terraform_state_bucket" {
-  description = "Name of S3 bucket where Terraform states for this account are stored"
-}
