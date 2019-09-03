@@ -16,8 +16,6 @@
     - Building vault cluster and web ui login to gain access to your identity / each services identity that can then be 
     assumed to make all the changes in the accounts / authenticate with various DApps
 
-
-
 ## TTD 
 
 Near term (Early September): 
@@ -43,6 +41,8 @@ modules will show up in associated cloud folder.
 - [terraform-aws-icon-p-rep-keys](https://github.com/robc-io/terraform-aws-icon-p-rep-keys)
 - [terraform-aws-icon-citizen-node](https://github.com/robc-io/terraform-aws-icon-citizen-node)
 - [terraform-aws-cloudfront-s3-acm](https://github.com/robc-io/terraform-aws-cloudfront-s3-acm)
+- [terraform-aws-cloudfront-s3-acm-root](https://github.com/robc-io/terraform-aws-cloudfront-s3-acm-root)
+- [terraform-aws-icon-lambda-whitelist-cron](https://github.com/robc-io/terraform-aws-icon-lambda-whitelist-cron)
 
 
 ### Workflow 
