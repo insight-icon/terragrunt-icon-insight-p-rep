@@ -1,16 +1,21 @@
 # terragrunt-icon-insight-p-rep
 
-**WARNING** : This is very much a work in progress.  Please contact me via telegram or the ICON forum for any input. 
+**Work in progress** - Please get in touch 
 
 [Link to ICON Forum thread covering this work.](https://forum.icon.community/t/automated-terraform-deployments/113)
 
 ## Current state 
 
+- Focused on `single-p-rep-single-citizen` deployment until sentry layer is done 
 - Running multiple environments (prod, stage, dev) each tied to their own respective accounts 
     - Moving this to a multi-account security strategy with all IAM roles stored in a single account
-- `aws/single-p-rep-single-citizen/dev` where current work is taking place
-- Nodes are starting but need configuration via SSH 
-    - Assuming P-Rep nodes will be manual for now with governance policies dictating key handling 
+- Building centralized logging and monitoring 
+    - Insight project seed will cover these two areas separately
+- Building identity account 
+    - Already assigned project to Justin Grosvner 
+    - Building vault cluster and web ui login to gain access to your identity / each services identity that can then be 
+    assumed to make all the changes in the accounts / authenticate with various DApps
+
 
 
 ## TTD 
