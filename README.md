@@ -4,6 +4,15 @@
 
 [Link to ICON Forum thread covering this work.](https://forum.icon.community/t/automated-terraform-deployments/113)
 
+## Note to users 
+
+- This is very much the development repo for this work 
+- Ultimately the production deployments will be ripped out and put in separate repo to be run under a single account
+- Right now, the setup is assumed to be multi-account though new users will want to try this setup before starting 
+new accounts 
+- If you are just trying to see what that will look like, it would basically be a copy and paste of the whole environment 
+directory, ie `dev`/`prod`/`stage`, into a new repo and it should run without issues. 
+
 ## To Use 
 
 1. Export AWS keys to environment variables or profile 
