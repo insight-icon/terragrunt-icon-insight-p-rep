@@ -11,10 +11,11 @@
     - Moving this to a multi-account security strategy with all IAM roles stored in a single account
 - Building centralized logging and monitoring 
     - Insight project seed will cover these two areas separately
+    - [See proposals](https://docs.insight-icon.net/insight-icon-project-seeds/index-project-seeds.html)
 - Building identity account 
     - Already assigned project to Justin Grosvner 
-    - Building vault cluster and web ui login to gain access to your identity / each services identity that can then be 
-    assumed to make all the changes in the accounts / authenticate with various DApps
+    - Building vault cluster and web ui login to gain access to applications 
+    - 
 
 ## TTD 
 
