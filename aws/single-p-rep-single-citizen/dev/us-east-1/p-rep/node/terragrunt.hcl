@@ -9,6 +9,10 @@ include {
   path = find_in_parent_folders()
 }
 
+dependency "iam" {
+  config_path = "../../../global/profiles/p-rep"
+}
+
 dependency "vpc" {
   config_path = "../../network/vpc"
 }
@@ -38,4 +42,6 @@ inputs = {
 
   security_groups = dependency.sg.outputs.security_group_ids
   subnet_id = dependency.vpc.outputs.public_subnets[0]
+
+  instance_profile_id = dependency.iam.outputs.instance_profile_id
 }
