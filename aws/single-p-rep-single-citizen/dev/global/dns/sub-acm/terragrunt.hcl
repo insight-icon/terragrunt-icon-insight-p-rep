@@ -8,9 +8,7 @@ include {
 }
 
 inputs = {
-  subdomain = "prod"
-  environment = "prod"
-  name = "prod-redirect"
+  name = "dev-subdomain"
 }
 
 

@@ -8,8 +8,8 @@ include {
 }
 
 inputs = {
-  subdomain = "prod"
-  environment = "prod"
-  name = "prod-redirect"
+  subdomain = "stage"
+  environment = "stage"
+  name = "stage-redirect"
 }
 
