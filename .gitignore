@@ -22,3 +22,5 @@ _old/
 /aws/modules/terraform-aws-icon-p-rep-sg/
 
 /aws/modules/*
+/aws/modules/terraform-aws-icon-node-iam/
+/aws/modules/terraform-aws-subdomain-simple/

@@ -7,6 +7,8 @@
     "aws/modules/terraform-aws-icon-citizen-sg": "https://github.com/robc-io/terraform-aws-icon-citizen-sg",
     "aws/modules/terraform-aws-cloudfront-s3-acm": "https://github.com/robc-io/terraform-aws-cloudfront-s3-acm",
     "aws/modules/terraform-aws-cloudfront-s3-acm-root": "https://github.com/robc-io/terraform-aws-cloudfront-s3-acm-root",
-    "aws/modules/terraform-aws-icon-lambda-whitelist-cron": "https://github.com/robc-io/terraform-aws-icon-lambda-whitelist-cron"
+    "aws/modules/terraform-aws-icon-lambda-whitelist-cron": "https://github.com/robc-io/terraform-aws-icon-lambda-whitelist-cron",
+    "aws/modules/terraform-aws-icon-node-iam": "https://github.com/robc-io/terraform-aws-icon-node-iam",
+    "aws/modules/terraform-aws-subdomain-simple": "https://github.com/robc-io/terraform-aws-subdomain-simple"
   }
 }
