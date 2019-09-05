@@ -1,5 +1,6 @@
 terraform {
-  source = "https://github.com/robc-io/terraform-aws-subdomain-simple"
+//  source = "https://github.com/robc-io/terraform-aws-subdomain-simple"
+  source = "../../../../../modules/terraform-aws-subdomain-simple"
 }
 
 include {
@@ -8,6 +9,8 @@ include {
 
 inputs = {
   region = "us-east-1"
-  subdomain = "prep"
+  subdomain = "prod"
+  environment = "prod"
+  name = "prod-redirect"
 }
 
