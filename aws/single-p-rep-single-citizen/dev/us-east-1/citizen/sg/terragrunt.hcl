@@ -1,5 +1,6 @@
 terraform {
-  source = "github.com/robc-io/terraform-aws-icon-p-rep-sg.git?ref=0.0.1"
+//  source = "github.com/robc-io/terraform-aws-icon-p-rep-sg.git?ref=0.0.1"
+  source = "github.com/robc-io/terraform-aws-icon-p-rep-sg.git"
 }
 
 include {
@@ -11,7 +12,7 @@ dependency "vpc" {
 }
 
 inputs = {
-  name = "sg-citizen"
+  name = "citizen"
   group = "mainnet"
   vpc_id = dependency.vpc.outputs.vpc_id
   resource_group = "" # TODO RM
