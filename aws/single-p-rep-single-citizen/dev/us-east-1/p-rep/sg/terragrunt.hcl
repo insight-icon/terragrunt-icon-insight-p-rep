@@ -11,7 +11,7 @@ dependency "vpc" {
 }
 
 inputs = {
-  name = "security-groups"
+  name = "sg-p-rep"
   group = "mainnet"
   vpc_id = dependency.vpc.outputs.vpc_id
   resource_group = "" # TODO RM

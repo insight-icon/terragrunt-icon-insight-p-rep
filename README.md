@@ -23,10 +23,8 @@
 cd aws/single-p-rep-single-citizen/prod/
 chmod +x ./helpers/init.sh 
 ./helpers/init.sh <ACCOUNT_ID> us-east-1 <LOCAL_KEY_FILE path> 
-cd us-east-1/network
-terragrunt apply-all --terragrunt-source-update
-cd ../p-rep
-terragrunt apply-all --terragrunt-source-update
+cd us-east-1
+terragrunt apply-all --terragrunt-source-update 
 ```
 
 This will be simplified but basically we need sensitive information like account_id 
