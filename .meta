@@ -10,6 +10,8 @@
     "aws/modules/terraform-aws-icon-lambda-whitelist-cron": "https://github.com/robc-io/terraform-aws-icon-lambda-whitelist-cron",
     "aws/modules/terraform-aws-icon-node-iam": "https://github.com/robc-io/terraform-aws-icon-node-iam",
     "aws/modules/terraform-aws-subdomain-root-ns": "https://github.com/robc-io/terraform-aws-subdomain-root-ns",
-    "aws/modules/terraform-aws-subdomain-acm": "https://github.com/robc-io/terraform-aws-subdomain-acm"
+    "aws/modules/terraform-aws-subdomain-acm": "https://github.com/robc-io/terraform-aws-subdomain-acm",
+    "aws/modules/terraform-aws-icon-iam": "https://github.com/robc-io/terraform-aws-icon-iam",
+    "aws/modules/tf_aws_bastion_s3_keys_tmp": "https://github.com/robc-io/tf_aws_bastion_s3_keys_tmp"
   }
 }

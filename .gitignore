@@ -24,3 +24,5 @@ _old/
 /aws/modules/*
 /aws/modules/terraform-aws-icon-node-iam/
 /aws/modules/terraform-aws-subdomain-simple/
+/aws/modules/terraform-aws-icon-iam/
+/aws/modules/tf_aws_bastion_s3_keys_tmp/
