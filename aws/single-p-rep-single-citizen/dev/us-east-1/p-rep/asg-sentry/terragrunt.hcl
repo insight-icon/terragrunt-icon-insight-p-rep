@@ -7,7 +7,7 @@ include {
 }
 
 dependency "data" {
-  config_path = "../data"
+  config_path = "../../data"
 }
 
 dependency "vpc" {
@@ -30,6 +30,8 @@ dependency "node" {
 inputs = {
   name = "service"
   spot_price = "1"
+
+//  user_data =
 
   target_group_arns = dependency.alb.outputs.target_group_arns
   p_rep_ip = dependency.node.outputs.private_ip
