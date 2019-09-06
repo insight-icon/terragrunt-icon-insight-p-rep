@@ -44,4 +44,3 @@ inputs = {
   target_groups = "${list(map("name", "p-rep-tg", "backend_protocol", "HTTPS", "backend_port", "7100"))}"
   target_groups_count = "1"
 }
-yes

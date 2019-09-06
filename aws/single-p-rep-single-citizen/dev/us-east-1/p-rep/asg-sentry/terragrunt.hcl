@@ -6,6 +6,10 @@ include {
   path = find_in_parent_folders()
 }
 
+dependency "data" {
+  config_path = "../data"
+}
+
 dependency "vpc" {
   config_path = "../../network/vpc"
 }
@@ -25,16 +29,16 @@ dependency "node" {
 
 inputs = {
   name = "service"
-  spot_price = "1.2"
+  spot_price = "1"
 
   target_group_arns = dependency.alb.outputs.target_group_arns
-  p_rep_ip = dependendcy.node.outputs.private_ip
+  p_rep_ip = dependency.node.outputs.private_ip
 
   # Launch configuration
   lc_name = "p-rep-sentry-lc"
 
-  image_id = "data.aws_ami.ubuntu.id"
-  instance_type = "t2.small"
+  image_id = dependency.data.outputs.ubuntu_ami_id
+  instance_type = "m4.2xlarge"
   security_groups = dependency.sg.outputs.security_group_ids
 
 
