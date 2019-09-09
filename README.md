@@ -4,14 +4,6 @@
 
 [Link to ICON Forum thread covering this work.](https://forum.icon.community/t/automated-terraform-deployments/113)
 
-## Note to users 
-
-- This is very much the development repo for this work 
-- Ultimately the production deployments will be ripped out and put in separate repo to be run under a single account
-- Right now, the setup is assumed to be multi-account though new users will want to try this setup before starting 
-new accounts 
-- If you are just trying to see what that will look like, it would basically be a copy and paste of the whole environment 
-directory, ie `dev`/`prod`/`stage`, into a new repo and it should run without issues. 
 
 ## To Use 
 
@@ -31,7 +23,7 @@ directory, ie `dev`/`prod`/`stage`, into a new repo and it should run without is
 ```
 cd aws/single-p-rep-single-citizen/prod/
 chmod +x ./helpers/init.sh 
-./helpers/init.sh <ACCOUNT_ID> us-east-1 <LOCAL_KEY_FILE path> 
+./helpers/init.sh <ACCOUNT_ID> us-east-1 <LOCAL_KEY_FILE path> ## This is changing - check the account-example.tfvars for what you need 
 cd us-east-1
 terragrunt apply-all --terragrunt-source-update 
 ```
@@ -42,6 +34,21 @@ This will be simplified but basically we need sensitive information like account
 8. To destroy replace `terragrunt apply-all` with `terragrunt destroy-all`
 9. Make modifications
 10. Repeat
+
+## Note to users 
+
+- This repo is changing fast, be warned...
+- Ultimately the production deployments will be ripped out and put in separate repo to be run under a single account
+- Right now, the setup is assumed to be multi-account though new users will want to try this setup before starting 
+new accounts 
+    - **As 9/6 you will need to manually populate an NS record on the domain to point to the hosted zone that you will 
+    use to deploy the ACM SSL cert for the ALB** 
+    - This is automated though so just make sure `dig @1.1.1.1 +short NS dev.insight-icon.net` returns the right name 
+    servers on the subdomain, ie. `dev` / `prod`
+    - `dev` is for testnet 
+- If you are just trying to see what that will look like, it would basically be a copy and paste of the whole environment 
+directory, ie `dev`/`prod`/`stage`, into a new repo and it should run without issues. 
+
 
 ## Current state 
 
