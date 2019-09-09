@@ -3,13 +3,11 @@ terraform {
     commands = get_terraform_commands_that_need_vars()
 
     required_var_files = [
+      "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("group.tfvars")}",
       "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("region.tfvars")}",
       "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("environment.tfvars")}",
       "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("account.tfvars")}"
     ]
-//    optional_var_files = [
-//      "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("group.tfvars")}",
-//    ]
   }
 }
 

@@ -44,4 +44,7 @@ inputs = {
   subnet_id = dependency.vpc.outputs.public_subnets[0]
 
   instance_profile_id = dependency.iam.outputs.instance_profile_id
+
+//  TODO: Fix this
+  tags = {}
 }

@@ -1,3 +1,3 @@
-# Single P-Rep Deployment 
+# ICON Blockchain Centralized Logging
 
-Simplest of deployments just to prove out underlying infrastructure automation design. 
+[Proposal docs](https://docs.insight-icon.net/insight-icon-project-seeds/icon-logging.html)

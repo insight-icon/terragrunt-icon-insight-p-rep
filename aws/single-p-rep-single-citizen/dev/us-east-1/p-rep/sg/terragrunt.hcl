@@ -16,4 +16,6 @@ inputs = {
   group = "mainnet"
   vpc_id = dependency.vpc.outputs.vpc_id
   resource_group = "" # TODO RM
+
+  tags = {}
 }

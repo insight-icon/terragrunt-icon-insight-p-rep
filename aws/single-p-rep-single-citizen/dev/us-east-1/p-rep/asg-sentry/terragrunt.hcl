@@ -31,10 +31,9 @@ inputs = {
   name = "service"
   spot_price = "1"
 
-//  user_data =
+//  user_data = dependency.data.outputs.sentry_user_data
 
-  target_group_arns = dependency.alb.outputs.target_group_arns
-  p_rep_ip = dependency.node.outputs.private_ip
+//  target_group_arns = dependency.alb.outputs.target_group_arns
 
   # Launch configuration
   lc_name = "p-rep-sentry-lc"
