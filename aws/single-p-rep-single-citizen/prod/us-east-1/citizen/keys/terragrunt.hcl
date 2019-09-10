@@ -9,8 +9,7 @@ include {
 }
 
 inputs = {
-  name = "p-rep"
+  name = "citizen"
 
-  //  TODO: Fix this
   tags = {}
 }
