@@ -31,9 +31,9 @@ export TF_INPUT=0
 #done
 
 ## TODO: Turning into array + loop - doesn't work as well as this does
+terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/logging
 terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir global
 terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/network
-terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/logging
 terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/citizen
 terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/p-rep
 terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/p-rep

@@ -22,7 +22,7 @@ DIRECTORIES=( \
 
 for i in "${DIRECTORIES[@]}"
 do
-   terragrunt destroy --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir $i
+   terragrunt destroy --terragrunt-source-update --terragrunt-non-interactive -force --terragrunt-working-dir $i
 done
 
 #terragrunt destroy --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/citizen
@@ -30,4 +30,3 @@ done
 #terragrunt destroy-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/logging
 #terragrunt destroy-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir us-east-1/network
 #terragrunt destroy-all --terragrunt-source-update --terragrunt-non-interactive --terragrunt-working-dir global
-

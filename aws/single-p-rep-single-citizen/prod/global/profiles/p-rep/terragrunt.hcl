@@ -23,7 +23,7 @@ locals {
 //}
 
 dependency "log_config_bucket" {
-  config_path = "../../us-east-1/logging/log-config-bucket"
+  config_path = "../../../us-east-1/logging/log-config-bucket"
 }
 
 include {
