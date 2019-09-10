@@ -1,8 +1,14 @@
 //TODO Replace with official security group module - make sure rules are added as resources, not inline with sg group
 //Becuase changes in SG force new resource in dependencies
 terraform {
-//  source = "github.com/robc-io/terraform-aws-icon-p-rep-sg.git?ref=0.0.1"
-  source = "github.com/robc-io/terraform-aws-icon-p-rep-sg.git"
+//  source = "github.com/${local.repo_owner}/${local.repo_name}.git?ref=0.1.0"
+  source = "github.com/${local.repo_owner}/${local.repo_name}.git"
+//  source = "../../../../../modules/${local.repo_name}"
+}
+
+locals {
+  repo_owner = "robc-io"
+  repo_name = "terraform-aws-icon-p-rep-sg"
 }
 
 include {
