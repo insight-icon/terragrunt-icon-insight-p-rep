@@ -10,7 +10,6 @@
 //environment = "prod"
 
 log_bucket_region = "us-east-1"
-environment = "prod"
-node_subdomain = "prod"
-stage = "prod"
-
+environment       = "prod"
+node_subdomain    = "prod"
+stage             = "prod"
