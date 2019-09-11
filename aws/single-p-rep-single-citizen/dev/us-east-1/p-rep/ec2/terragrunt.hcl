@@ -25,12 +25,16 @@ dependency "keys" {
   config_path = "../keys"
 }
 
+dependency "log_config" {
+  config_path = "../../logging/log-config-bucket"
+}
+
 inputs = {
+  spot_price = 1.3
+
   resource_group = "node"
   group = "mainnet"
 
-  efs_directory = "/opt/data"
-  resource_group = "ec2"
   volume_dir = ""
   ebs_volume_size = 100
   root_volume_size = "20"
@@ -44,6 +48,9 @@ inputs = {
   subnet_id = dependency.vpc.outputs.public_subnets[0]
 
   instance_profile_id = dependency.iam.outputs.instance_profile_id
+
+  log_config_bucket = dependency.log_config.outputs.log_config_bucket
+  log_config_key = dependency.log_config.outputs.log_config_key
 
 //  TODO: Fix this
   tags = {}
