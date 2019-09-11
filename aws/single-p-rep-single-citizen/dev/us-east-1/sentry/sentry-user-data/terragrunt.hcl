@@ -6,11 +6,11 @@ include {
   path = find_in_parent_folders()
 }
 
-dependency "node" {
-  config_path = "../node"
+dependency "ec2" {
+  config_path = "../p-rep/ec2"
 }
 
 inputs = {
   name = "p-rep"
-  p_rep_ip = dependency.node.outputs.private_ip
+  p_rep_ip = dependency.ec2.outputs.private_ip
 }
