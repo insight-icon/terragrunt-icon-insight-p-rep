@@ -8,10 +8,6 @@ include {
   path = find_in_parent_folders()
 }
 
-locals {
-  name = "vpc"
-}
-
 inputs = {
   name = "PRep"
 }

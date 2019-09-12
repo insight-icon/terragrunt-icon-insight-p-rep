@@ -9,7 +9,7 @@ include {
 }
 
 dependency "s3" {
-  config_path = "../../../us-east-1/network/bastion/keys-bucket"
+  config_path = "../../../us-east-1/bastion/keys-bucket"
 }
 
 inputs = {
