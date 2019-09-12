@@ -12,12 +12,12 @@ DIRECTORIES=( \
 "us-east-1/p-rep/ec2" \
 "us-east-1/p-rep/sg" \
 "us-east-1/p-rep/keys" \
-"us-east-1/logging/log-config-bucket" \
 "us-east-1/network/vpc" \
 "global/audit/s3-cloudtrail" \
 "global/audit/cloudtrail" \
 "global/profiles/citizen" \
 "global/profiles/p-rep" \
+"us-east-1/logging/log-config-bucket" \
 )
 
 for i in "${DIRECTORIES[@]}"

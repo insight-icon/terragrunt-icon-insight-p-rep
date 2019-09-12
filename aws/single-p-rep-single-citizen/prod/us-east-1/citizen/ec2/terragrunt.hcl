@@ -16,6 +16,7 @@ include {
 
 dependency "iam" {
   config_path = "../../../global/profiles/p-rep"
+//  skip_outputs = true
 }
 
 dependency "vpc" {
@@ -41,7 +42,7 @@ inputs = {
 //  group = "mainnet"
 
   volume_dir = ""
-  ebs_volume_size = 100
+  ebs_volume_size = 170
   root_volume_size = "20"
   instance_type = "c4.2xlarge"
   volume_path = "/dev/sdf"
