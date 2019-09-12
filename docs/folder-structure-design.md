@@ -31,3 +31,10 @@ The file structure of this project is a highly opinionated design that needs a l
     │   └── region.tfvars
     └── terragrunt.hcl
 ```
+
+
+### Potential Improvements 
+
+- Aggregating more modules into single modules 
+    - This is really just down to philosophy 
+

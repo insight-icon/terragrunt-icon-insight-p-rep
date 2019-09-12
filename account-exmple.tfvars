@@ -18,3 +18,5 @@ stage = "dev"
 
 corporate_ip = "1.2.3.4"
 allowed_cidr = ["1.2.3.4/32"]
+
+zone_id = "Z9870970976"

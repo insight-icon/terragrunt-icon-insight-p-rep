@@ -69,19 +69,6 @@ directory, ie `dev`/`prod`/`stage`, into a new repo and it should run without is
  Basically a lot more replication and then filling in with proper features. Alarms and other enterprise security features
  will be more important when the basic stack is up and when we move to HA. 
 
-## TTD 
-
-Near term (Early September): 
-
-- Simple cloudwatch logging 
-- Ansible configuration steps 
-
-Longer term:
-- Alarms 
-- Failover 
-- Supporting services 
-
-
 ### Child Modules 
 
 To pull in a local copy of associated modules, install `meta` - `npm i -g meta`. Then run `meta git clone .` and the 
