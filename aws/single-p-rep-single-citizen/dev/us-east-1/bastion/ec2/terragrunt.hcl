@@ -10,11 +10,11 @@ include {
 }
 
 dependency "vpc" {
-  config_path = "../../vpc"
+  config_path = "../../network/vpc"
 }
 
 dependency "data" {
-  config_path = "../../../data"
+  config_path = "../../data"
 }
 
 dependency "s3" {
@@ -22,7 +22,7 @@ dependency "s3" {
 }
 
 dependency "profile" {
-  config_path = "../../../../global/profiles/bastion"
+  config_path = "../../../global/profiles/bastion"
 }
 
 

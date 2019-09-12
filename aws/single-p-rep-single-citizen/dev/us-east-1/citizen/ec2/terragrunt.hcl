@@ -9,6 +9,10 @@ include {
   path = find_in_parent_folders()
 }
 
+dependency "iam" {
+  config_path = "../../../global/profiles/p-rep"
+}
+
 dependency "vpc" {
   config_path = "../../network/vpc"
 }
@@ -21,22 +25,30 @@ dependency "keys" {
   config_path = "../keys"
 }
 
-inputs = {
-  resource_group = "node"
-  group = "mainnet"
+dependency "log_config" {
+  config_path = "../../logging/log-config-bucket"
+}
 
-  efs_directory = "/opt/data"
-  resource_group = "ec2"
+inputs = {
+  name = "citizen"
+
   volume_dir = ""
   ebs_volume_size = 100
   root_volume_size = "20"
-  instance_type = "m4.large"
+  instance_type = "c4.2xlarge"
   volume_path = "/dev/sdf"
 
   key_name = dependency.keys.outputs.key_name
   public_key = dependency.keys.outputs.public_key
 
   security_groups = dependency.sg.outputs.security_group_ids
-
   subnet_id = dependency.vpc.outputs.public_subnets[0]
+
+  instance_profile_id = dependency.iam.outputs.instance_profile_id
+
+  log_config_bucket = dependency.log_config.outputs.log_config_bucket
+  log_config_key = dependency.log_config.outputs.log_config_key
+
+  //  TODO: Fix this
+  tags = {}
 }

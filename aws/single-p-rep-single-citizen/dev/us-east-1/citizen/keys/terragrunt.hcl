@@ -10,4 +10,6 @@ include {
 
 inputs = {
   name = "citizen"
+
+  tags = {}
 }
