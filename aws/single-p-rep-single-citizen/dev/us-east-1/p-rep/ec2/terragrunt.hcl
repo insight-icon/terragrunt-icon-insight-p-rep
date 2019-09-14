@@ -30,7 +30,7 @@ dependency "log_config" {
 }
 
 inputs = {
-  spot_price = 1.3
+//  spot_price = 1.3
 
   resource_group = "node"
   group = "mainnet"
