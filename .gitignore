@@ -23,6 +23,7 @@ _old/
 /aws/modules/terraform-aws-icon-citizen-sg/
 /aws/modules/terraform-aws-cloudfront-s3-acm/
 /aws/modules/terraform-aws-icon-p-rep-node/
+/aws/modules/terraform-aws-icon-p-rep-node-spot/
 /aws/modules/terraform-aws-icon-p-rep-sg/
 
 /aws/modules/*

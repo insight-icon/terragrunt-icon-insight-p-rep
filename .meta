@@ -1,6 +1,7 @@
 {
   "projects": {
     "aws/modules/terraform-aws-icon-p-rep-node": "https://github.com/robc-io/terraform-aws-icon-p-rep-node",
+    "aws/modules/terraform-aws-icon-p-rep-node-spot": "https://github.com/robc-io/terraform-aws-icon-p-rep-node-spot",
     "aws/modules/terraform-aws-icon-p-rep-sg": "https://github.com/robc-io/terraform-aws-icon-p-rep-sg",
     "aws/modules/terraform-aws-icon-p-rep-keys": "https://github.com/robc-io/terraform-aws-icon-p-rep-keys",
     "aws/modules/terraform-aws-icon-citizen-node": "https://github.com/robc-io/terraform-aws-icon-citizen-node",
@@ -12,6 +13,7 @@
     "aws/modules/terraform-aws-subdomain-root-ns": "https://github.com/robc-io/terraform-aws-subdomain-root-ns",
     "aws/modules/terraform-aws-subdomain-acm": "https://github.com/robc-io/terraform-aws-subdomain-acm",
     "aws/modules/terraform-aws-icon-iam": "https://github.com/robc-io/terraform-aws-icon-iam",
-    "aws/modules/tf_aws_bastion_s3_keys_tmp": "https://github.com/robc-io/tf_aws_bastion_s3_keys_tmp"
+    "aws/modules/tf_aws_bastion_s3_keys_tmp": "https://github.com/robc-io/tf_aws_bastion_s3_keys_tmp",
+    "aws/modules/terraform-aws-icon-peering-mgmt": "https://github.com/robc-io/terraform-aws-icon-peering-mgmt"
   }
 }
