@@ -17,7 +17,6 @@ DIRECTORIES=( \
 "global/profiles/p-rep" \
 "global/profiles/citizen" \
 "us-east-1/logging/log-config-bucket" \
-#"us-east-1/logging/peering-mgmt" \
 )
 
 for i in "${DIRECTORIES[@]}"
