@@ -14,6 +14,7 @@
     "aws/modules/terraform-aws-subdomain-acm": "https://github.com/robc-io/terraform-aws-subdomain-acm",
     "aws/modules/terraform-aws-icon-iam": "https://github.com/robc-io/terraform-aws-icon-iam",
     "aws/modules/tf_aws_bastion_s3_keys_tmp": "https://github.com/robc-io/tf_aws_bastion_s3_keys_tmp",
-    "aws/modules/terraform-aws-icon-peering-mgmt": "https://github.com/robc-io/terraform-aws-icon-peering-mgmt"
+    "aws/modules/terraform-aws-icon-peering-mgmt": "https://github.com/robc-io/terraform-aws-icon-peering-mgmt",
+    "aws/modules/terraform-aws-icon-nlb": "https://github.com/robc-io/terraform-aws-icon-nlb"
   }
 }
