@@ -12,10 +12,11 @@ DIRECTORIES=( \
 "us-east-1/p-rep/ec2" \
 "us-east-1/p-rep/sg" \
 "us-east-1/p-rep/keys" \
-"us-east-1/network/vpc" \
+"us-east-1/network/peering-mgmt" \
 "us-east-1/network/vpc-mgmt" \
-"global/profiles/p-rep" \
+"us-east-1/network/vpc" \
 "global/profiles/citizen" \
+"global/profiles/p-rep" \
 "us-east-1/logging/log-config-bucket" \
 )
 

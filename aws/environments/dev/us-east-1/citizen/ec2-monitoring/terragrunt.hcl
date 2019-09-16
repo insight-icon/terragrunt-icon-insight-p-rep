@@ -49,6 +49,8 @@ inputs = {
   log_config_bucket = dependency.log_config.outputs.log_config_bucket
   log_config_key = dependency.log_config.outputs.log_config_key
 
+  user_data_script = ""
+
   //  TODO: Fix this
   tags = {}
 }
