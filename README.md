@@ -18,22 +18,17 @@
 
 **For Deployment** 
 
-6. Do this:
+6. Fill in the necessary values from the `account-example.tfvar` and place that file in the environment directory 
+(ie `prod` / `dev` / `stage`) - Right now we are only working in `dev`
+7. Run the appropriate `apply.sh` or `destroy.sh` script 
+8. If there are errors you can nudge the process along by applying in each subdirectory. A common error is 
+that you try to apply or destroy something before all of its dependencies are met. Destroy in particular as 
+it is easier to destroy something and have the error creep up on you compared to apply. 
 
-```
-cd aws/single-p-rep-single-citizen/prod/
-chmod +x ./helpers/init.sh 
-./helpers/init.sh <ACCOUNT_ID> us-east-1 <LOCAL_KEY_FILE path> ## This is changing - check the account-example.tfvars for what you need 
-cd us-east-1
-terragrunt apply-all --terragrunt-source-update 
-```
-
-This will be simplified but basically we need sensitive information like account_id 
-
-7. You can now ssh into the box and get it going.  The `data` EBS volume that has 
-8. To destroy replace `terragrunt apply-all` with `terragrunt destroy-all`
-9. Make modifications
-10. Repeat
+7. You can now ssh into the box and get it going.  
+    - We are currently implementing configuration steps with Ansible 
+8. Make modifications
+9. Repeat
 
 ## Note to users 
 
@@ -74,14 +69,22 @@ directory, ie `dev`/`prod`/`stage`, into a new repo and it should run without is
 To pull in a local copy of associated modules, install `meta` - `npm i -g meta`. Then run `meta git clone .` and the 
 modules will show up in associated cloud folder. 
 
-- [terraform-aws-icon-p-rep-node](https://github.com/robc-io/terraform-aws-icon-p-rep-node)
 - [terraform-aws-icon-p-rep-sg](https://github.com/robc-io/terraform-aws-icon-p-rep-sg)
 - [terraform-aws-icon-p-rep-keys](https://github.com/robc-io/terraform-aws-icon-p-rep-keys)
 - [terraform-aws-icon-citizen-node](https://github.com/robc-io/terraform-aws-icon-citizen-node)
+- [terraform-aws-icon-citizen-node-spot](https://github.com/robc-io/terraform-aws-icon-citizen-node-spot)
+- [terraform-aws-icon-p-rep-node](https://github.com/robc-io/terraform-aws-icon-p-rep-node)
+- [terraform-aws-icon-p-rep-node-spot](https://github.com/robc-io/terraform-aws-icon-p-rep-node-spot)
 - [terraform-aws-cloudfront-s3-acm](https://github.com/robc-io/terraform-aws-cloudfront-s3-acm)
 - [terraform-aws-cloudfront-s3-acm-root](https://github.com/robc-io/terraform-aws-cloudfront-s3-acm-root)
 - [terraform-aws-icon-lambda-whitelist-cron](https://github.com/robc-io/terraform-aws-icon-lambda-whitelist-cron)
-
+- [terraform-aws-icon-node-iam](https://github.com/robc-io/terraform-aws-icon-node-iam)
+- [terraform-aws-subdomain-root-ns](https://github.com/robc-io/terraform-aws-subdomain-root-ns)
+- [terraform-aws-subdomain-acm](https://github.com/robc-io/terraform-aws-subdomain-acm)
+- [terraform-aws-icon-iam](https://github.com/robc-io/terraform-aws-icon-iam)
+- [tf_aws_bastion_s3_keys_tmp](https://github.com/robc-io/tf_aws_bastion_s3_keys_tmp)
+- [terraform-aws-icon-peering-mgmt](https://github.com/robc-io/terraform-aws-icon-peering-mgmt)
+- [terraform-aws-icon-nlb](https://github.com/robc-io/terraform-aws-icon-nlb)
 
 ### Workflow 
 

@@ -17,4 +17,3 @@
             - Manage permissions 
             - Rook 
             - Persistent volume claims 
-        - 

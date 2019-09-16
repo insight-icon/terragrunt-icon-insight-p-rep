@@ -10,4 +10,6 @@ Table of Contents:
    folder-structure-design
    why-use-terragrunt
    development-plans
+   e2e-testing-workflow
+   bootstrapping
    about-these-docs
