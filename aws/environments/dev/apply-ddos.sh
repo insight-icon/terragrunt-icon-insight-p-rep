@@ -11,27 +11,18 @@ DIRECTORIES=( \
 "us-east-1/network/vpc" \
 "us-east-1/logging/log-config-bucket" \
 "us-east-1/logging/lb-logging-bucket" \
-"us-east-1/p-rep/keys" \
-"us-east-1/p-rep/sg" \
-"us-east-1/p-rep/ec2-ddos"
+"us-east-1/citizen/keys" \
+"us-east-1/citizen/sg" \
+"us-east-1/citizen/ec2-ddos"
 "us-east-1/p-rep/keys" \
 "us-east-1/p-rep/sg" \
 "us-east-1/p-rep/citizen-ddos"
 )
 
-#"us-east-1/p-rep/keys" \
-#"us-east-1/p-rep/sg" \
-#"us-east-1/p-rep/ec2" \
-#"us-east-1/citizen/keys" \
-#"us-east-1/citizen/sg" \
-#"us-east-1/citizen/ec2" \
-
-
 for i in "${DIRECTORIES[@]}"
 do
-   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir$i
+   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir $i
 done
-
 
 #L4 prod.insight-icon.net:7100 -> NLB
 #L7 prod.insight-icon.net/prep -> ALB
