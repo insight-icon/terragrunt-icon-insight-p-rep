@@ -12,4 +12,5 @@ Table of Contents:
    development-plans
    e2e-testing-workflow
    bootstrapping
+   resources
    about-these-docs
