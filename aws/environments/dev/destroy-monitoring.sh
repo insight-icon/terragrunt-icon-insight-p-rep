@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e
 # Cache the plugins
 mkdir -p ~/.terraform.d/plugin-cache
 export TF_PLUGIN_CACHE_DIR=~/.terraform.d/plugin-cache
@@ -28,5 +28,5 @@ DIRECTORIES=( \
 
 for i in "${DIRECTORIES[@]}"
 do
-   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir$i
+   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir $i
 done

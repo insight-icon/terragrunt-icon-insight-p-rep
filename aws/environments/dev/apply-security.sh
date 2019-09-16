@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e
 # Cache the plugins
 mkdir -p ~/.terraform.d/plugin-cache
 export TF_PLUGIN_CACHE_DIR=~/.terraform.d/plugin-cache
