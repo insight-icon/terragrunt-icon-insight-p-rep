@@ -29,7 +29,7 @@ DIRECTORIES=( \
 
 for i in "${DIRECTORIES[@]}"
 do
-   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir$i
+   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir $i
 done
 
 
