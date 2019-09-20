@@ -28,6 +28,9 @@ dependency "sg" {
   config_path = "../elasticsearch-sg"
 }
 
+
+// NOTES:
+
 inputs = {
   name                    = "es"
   security_groups         = [dependency.sg.outputs.this_security_group_id]

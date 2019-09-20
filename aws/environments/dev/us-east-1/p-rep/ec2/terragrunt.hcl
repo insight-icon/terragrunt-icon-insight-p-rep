@@ -1,5 +1,5 @@
 terraform {
-//  source = "github.com/${local.repo_owner}/${local.repo_name}.git?ref=0.1.0"
+//  source = "github.com/${local.repo_owner}/${local.repo_name}.git?ref=${local.repo_version}"
 //  source = "github.com/${local.repo_owner}/${local.repo_name}.git"
   source = "../../../../../modules/${local.repo_name}"
 }
@@ -7,6 +7,7 @@ terraform {
 locals {
   repo_owner = "robc-io"
   repo_name = "terraform-aws-icon-p-rep-node"
+  repo_version = "0.1.0"
 }
 
 
