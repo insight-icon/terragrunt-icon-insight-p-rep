@@ -1,18 +1,19 @@
 terraform {
-//  source = "github.com/${local.repo_owner}/${local.repo_name}.git?ref=${local.repo_version}"
-//  source = "github.com/${local.repo_owner}/${local.repo_name}.git"
-  source = "../../../../../modules/${local.repo_name}"
+  source = "${local.source}"
+}
+
+include {
+  path = find_in_parent_folders()
 }
 
 locals {
   repo_owner = "robc-io"
   repo_name = "terraform-aws-icon-p-rep-node"
-  repo_version = "0.1.0"
-}
+  repo_version = "master"
+  repo_path = ""
+  local_source = true
 
-
-include {
-  path = find_in_parent_folders()
+  source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
 }
 
 dependency "iam" {
