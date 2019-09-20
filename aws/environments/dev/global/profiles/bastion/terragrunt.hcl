@@ -1,7 +1,14 @@
 terraform {
-//  source = "github.com/robc-io/terraform-aws-icon-iam//bastion.git?ref=v0.0.1"
-  source = "github.com/robc-io/terraform-aws-icon-iam.git//bastion"
-//  source = "../../../../../modules/terraform-aws-icon-node-iam"
+  source = "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
+////  source = "github.com/${local.repo_owner}/${local.repo_name}.git"
+////  source = "../../../../../modules/${local.repo_name}"
+}
+
+locals {
+  repo_owner = "robc-io"
+  repo_name = "terraform-aws-icon-iam"
+  repo_version = "v0.2.0"
+  repo_path = "bastion"
 }
 
 include {

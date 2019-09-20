@@ -1,11 +1,19 @@
 terraform {
-//  source = "github.com/robc-io/terraform-aws-icon-node-iam.git?ref=v0.0.1"
-//  source = "github.com/robc-io/terraform-aws-icon-node-iam.git"
-  source = "../../../../../modules/terraform-aws-icon-node-iam"
+  source = "${local.source}"
 }
 
 include {
   path = find_in_parent_folders()
+}
+
+locals {
+  repo_owner = "robc-io"
+  repo_name = "terraform-aws-icon-node-iam"
+  repo_version = "v0.2.0"
+  repo_path = ""
+  local_source = true
+
+  source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
 }
 
 inputs = {
