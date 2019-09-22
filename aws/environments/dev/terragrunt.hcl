@@ -5,7 +5,9 @@ terraform {
     required_var_files = [
       "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("region.tfvars")}",
       "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("environment.tfvars")}",
-      "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("account.tfvars")}"
+      "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("account.tfvars")}",
+      "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("p-rep-configure.tfvars")}",
+      "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/${find_in_parent_folders("citizen-configure.tfvars")}"
     ]
 
     optional_var_files = [

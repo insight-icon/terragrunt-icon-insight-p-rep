@@ -18,6 +18,8 @@ DIRECTORIES=( \
 "us-east-1/citizen/keys" \
 "us-east-1/citizen/sg" \
 "us-east-1/citizen/ec2" \
+"us-east-1/p-rep/ec2-configuration" \
+"us-east-1/citizen/ec2-configuration" \
 )
 
 for i in "${DIRECTORIES[@]}"
