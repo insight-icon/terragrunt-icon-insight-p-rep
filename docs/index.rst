@@ -7,6 +7,7 @@ Table of Contents:
    :glob:
    :maxdepth: 2
 
+   readme_link
    folder-structure-design
    why-use-terragrunt
    development-plans
