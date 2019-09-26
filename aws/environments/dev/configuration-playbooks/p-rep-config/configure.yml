@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  roles:
+  - pack
+  - role: keystore
+    keystore: ./data/keystore # this is where your templating should go.
+  - bootstrap
