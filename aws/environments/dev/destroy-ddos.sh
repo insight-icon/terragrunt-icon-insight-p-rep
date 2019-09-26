@@ -6,17 +6,17 @@ export TF_PLUGIN_CACHE_DIR=~/.terraform.d/plugin-cache
 export TF_INPUT=0
 
 DIRECTORIES=( \
-"us-east-1/p-rep/ec2-ddos"
-"us-east-1/citizen/citizen-ddos"
-"us-east-1/p-rep/keys" \
-"us-east-1/p-rep/sg" \
+# "us-east-1/p-rep/ec2-ddos"
+"us-east-1/citizen/ec2-ddos" \
+# "us-east-1/p-rep/keys" \
+# "us-east-1/p-rep/sg" \
 "us-east-1/citizen/keys" \
 "us-east-1/citizen/sg" \
 "us-east-1/logging/lb-logging-bucket" \
 "us-east-1/logging/log-config-bucket" \
 "us-east-1/network/vpc" \
 "global/profiles/citizen" \
-"global/profiles/p-rep" \
+"global/profiles/p-rep" 
 )
 
 
