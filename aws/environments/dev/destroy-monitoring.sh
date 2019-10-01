@@ -13,11 +13,14 @@ DIRECTORIES=( \
 "us-east-1/p-rep/sg" \
 "us-east-1/citizen/keys" \
 "us-east-1/citizen/sg" \
+"us-east-1/consul/dns" \
+"us-east-1/consul/ec2" \
+"us-east-1/consul/keys" \
 "global/profiles/p-rep" \
 "global/profiles/citizen" \
 "us-east-1/logging/log-config-bucket" \
-"us-east-1/network/vpc-services" \
 "us-east-1/network/peering-main-services" \
+"us-east-1/network/vpc-services" \
 "us-east-1/network/vpc" \
 )
 

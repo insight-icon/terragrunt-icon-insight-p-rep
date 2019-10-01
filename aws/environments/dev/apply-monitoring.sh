@@ -11,8 +11,12 @@ DIRECTORIES=( \
 "us-east-1/network/vpc" \
 "us-east-1/network/vpc-services" \
 "us-east-1/network/peering-main-services" \
-"us-east-1/network/peering-mgmt" \
+#"us-east-1/network/peering-mgmt" \
+"us-east-1/network/dns" \
 "us-east-1/logging/log-config-bucket" \
+"us-east-1/consul/keys" \
+"us-east-1/consul/ec2" \
+"us-east-1/consul/dns" \
 "us-east-1/services/eks" \
 "us-east-1/p-rep/keys" \
 "us-east-1/p-rep/sg" \

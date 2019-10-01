@@ -5,7 +5,7 @@ echo "Updating kubeconfig..."
 aws eks --region us-east-1 update-kubeconfig --name icon-svcs-cluster
 
 echo "Adding tiller account..."
-kubectl apply -f k8s/rbac-config.yaml
+kubectl apply -f k8s/tiller-config.yaml
 
 echo "Initializing Helm..."
 helm init --service-account tiller --history-max 200
@@ -63,5 +63,14 @@ EOF
 
 echo "Installing Prometheus Operator"
 helm install --name icon-prom stable/prometheus-operator -f k8s/prom-scrape-configs.yaml
+
+echo "Installing NGINX ingress controller..."
+helm install stable/nginx-ingress --name icon-ingress --set controller.metrics.enabled=true --set controller.stats.enabled=true --set controller.metrics.serviceMonitor.enabled=true
+
+echo "Installing Prometheus Operator..."
+helm install stable/prometheus-operator --name icon-prom -f k8s/prom-op-configs.yaml
+
+echo "Configuring ingress controller..."
+kubectl apply -f k8s/ingress-nginx.yaml
 
 echo "Done."
