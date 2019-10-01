@@ -1,0 +1,110 @@
+- name: "Add docker apt key"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+# Release part can probably be templated using ansible facts.
+- name: "Install docker apt repository"
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+    state: present
+
+- name: "Update repositories cache"
+  apt:
+    force_apt_get: yes
+    update_cache: yes
+
+- name: "Upgrade packages to the latest version"
+  apt:
+    force_apt_get: yes
+    upgrade: dist
+
+- name: "Install required packages"
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: yes
+    state: latest
+  vars:
+    packages:
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+      - python
+      - python3
+      - python-apt
+      - python3-apt
+      - python-pip
+      - python3-pip
+      - awscli
+      - docker-ce
+
+- name: "Install required packages (Ubuntu only)"
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: yes
+    state: latest
+  vars:
+    packages:
+      - linux-aws
+  when: ansible_distribution == 'Ubuntu'
+
+- name: "Add user to docker group"
+  user:
+    name: "{{ ansible_ssh_user }}"
+    groups: docker
+    append: yes
+
+- name: "Enable docker service, and start it"
+  systemd:
+    name: docker
+    enabled: yes
+    masked: no
+    state: started
+
+- name: "Install docker packages"
+  pip:
+    name: "{{ pippkgs }}"
+    executable: pip2
+    state: latest
+  vars:
+    pippkgs:
+      - pip
+      - docker
+      - docker-compose
+      - PyYAML
+
+- name: "Install pip3 docker packages"
+  pip:
+    name: "{{ pippkgs }}"
+    executable: pip3
+    state: latest
+  vars:
+    pippkgs:
+      - pip
+      - docker
+      - docker-compose
+      - PyYAML
+
+- name: "Create hard core limit file"
+  file:
+    path: /etc/security/limits.d/10.hardcore.conf
+    mode: '0644'
+    state: touch
+    owner: root
+    group: root
+
+- name: "Create data directory"
+  file:
+    path: /home/{{ ansible_ssh_user }}/data
+    mode: '0755'
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+- name: "Create cert directory"
+  file:
+    path: /home/{{ ansible_ssh_user }}/cert
+    mode: '0755'
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"

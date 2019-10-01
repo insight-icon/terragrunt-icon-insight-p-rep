@@ -1,0 +1,25 @@
+version: '3'
+services:
+   prep:
+      image: iconloop/prep-node:1909180304x565582
+      container_name: "prep-node"
+      network_mode: host
+      restart: always
+      environment:
+         LOOPCHAIN_LOG_LEVEL: "DEBUG"
+         ICON_LOG_LEVEL: "DEBUG"
+         DEFAULT_PATH: "/data/loopchain"
+         LOG_OUTPUT_TYPE: "file"
+         CERT_PATH: "/cert"     
+         iissCalculatePeriod: "1800"
+         termPeriod: "1800"
+         PRIVATE_PATH: "/cert/{==YOUR_KEYSTORE or YOUR_CERTKEY FILENAME==}"
+         PRIVATE_PASSWORD: "{==YOUR_KEY_PASSWORD==}"
+      cap_add:
+         - SYS_TIME
+      volumes:
+         - ./data:/data
+         - ./cert:/cert  
+      ports:
+         - 9000:9000
+         - 7100:7100

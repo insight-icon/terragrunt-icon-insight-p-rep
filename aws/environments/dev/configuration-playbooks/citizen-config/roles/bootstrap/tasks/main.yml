@@ -1,0 +1,24 @@
+- name: "Create ext4 filesystem on the EBS data volume /dev/xvdf"
+  filesystem:
+    fstype: ext4
+    dev: /dev/xvdf
+
+- name: "Mount EBS data volume under data directory"
+  mount:
+    path: /home/{{ ansible_ssh_user }}/data
+    src: /dev/xvdf
+    state: mounted
+    fstype: ext4
+
+- name: "Copy over the docker-compose file"
+  copy:
+    src: ../../../data/docker-compose.yaml
+    dest: /home/{{ ansible_ssh_user }}/docker-compose.yaml
+    mode: '0440'
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+- name: "Start node application via docker-compose"
+  docker_compose:
+    project_src: /home/{{ ansible_ssh_user }}
+    state: present

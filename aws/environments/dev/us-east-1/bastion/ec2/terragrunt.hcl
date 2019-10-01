@@ -2,7 +2,7 @@ terraform {
   //  TODO When tf12 PR goes through then use this one https://github.com/terraform-community-modules/tf_aws_bastion_s3_keys/pull/56
   //  source = "github.com/terraform-community-modules/tf_aws_bastion_s3_keys"
 //  source = "github.com/robc-io/tf_aws_bastion_s3_keys_tmp"
-  source = "../../../../../../modules/tf_aws_bastion_s3_keys_tmp"
+  source = "../../../../../modules/tf_aws_bastion_s3_keys_tmp"
 }
 
 include {
