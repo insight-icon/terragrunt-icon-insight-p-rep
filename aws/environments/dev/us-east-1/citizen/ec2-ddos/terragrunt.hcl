@@ -33,7 +33,7 @@ inputs = {
   name = "citizen"
 
   volume_dir = ""
-  ebs_volume_size = 1000
+  ebs_volume_size = 100
   root_volume_size = "20"
   instance_type = "c4.2xlarge"
   volume_path = "/dev/sdf"

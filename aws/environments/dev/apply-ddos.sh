@@ -16,9 +16,12 @@ DIRECTORIES=( \
 "us-east-1/p-rep/ec2-ddos" \
 "us-east-1/citizen/keys" \
 "us-east-1/citizen/sg" \
-"us-east-1/citizen/ec2-ddos" 
+"us-east-1/citizen/ec2-ddos" \
 )
 
+#"us-east-1/p-rep/keys" \
+#"us-east-1/p-rep/sg" \
+#"us-east-1/p-rep/citizen-ddos"
 
 for i in "${DIRECTORIES[@]}"
 do
