@@ -6,7 +6,7 @@ include {
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-services"
 }
 
 dependency "keys" {
@@ -21,10 +21,18 @@ inputs = {
   vpc_id = dependency.vpc.outputs.vpc_id
   allowed_inbound_cidr_blocks = ["10.0.0.0/15"] ## /15 to include both 10.0 and 10.1. Change if the VPCs change
   user_data = <<-EOF
-                #!/bin/bash
-                set -e
-                exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
-                /opt/consul/bin/run-consul --server --cluster-tag-key consul-servers --cluster-tag-value auto-join
+                    #!/bin/bash
+                    set -e
+                    exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+                    tee -a /opt/consul/config/settings.json << CONSULCONFIG
+                    { "domain": "aws.patchnotes.xyz",
+                      "telemetry": {
+                        "prometheus_retention_time": "24h",
+                        "disable_hostname": true
+                      }
+                    }
+                    CONSULCONFIG
+                    /opt/consul/bin/run-consul --server --cluster-tag-key consul-servers --cluster-tag-value auto-join
                 EOF
   cluster_size = 3
   cluster_tag_key = "consul-servers"
