@@ -25,7 +25,7 @@ inputs = {
                     set -e
                     exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
                     tee -a /opt/consul/config/settings.json << CONSULCONFIG
-                    { "domain": "aws.patchnotes.xyz",
+                    {
                       "telemetry": {
                         "prometheus_retention_time": "24h",
                         "disable_hostname": true
