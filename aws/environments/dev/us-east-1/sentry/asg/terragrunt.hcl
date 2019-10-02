@@ -14,47 +14,44 @@ dependency "vpc" {
   config_path = "../../network/vpc"
 }
 
-dependency "p_rep_sg" {
-  config_path = "../p-rep/sg"
+dependency "sg" {
+  config_path = "../sg"
 }
 
-dependency "node" {
-  config_path = "../node"
+dependency "data" {
+  config_path = "../data"
 }
 
-dependency "nlb" {
-  config_path = "../../network/nlb-p-rep"
-}
-
-//dependency "alb" {
-//  config_path = "../../network/alb-p-rep"
+//dependency "nlb" {
+//  config_path = "../../network/nlb-p-rep"
 //}
 
+
 inputs = {
-  name = "service"
+  name = "public"
   spot_price = "1"
 
   user_data = dependency.data.outputs.sentry_user_data
-
-//  target_group_arns = dependency.alb.outputs.target_group_arns
 
   # Launch configuration
   lc_name = "p-rep-sentry-lc"
 
   image_id = dependency.data.outputs.ubuntu_ami_id
   instance_type = "m4.2xlarge"
-  security_groups = dependency.p_rep_sg.outputs.security_group_ids
+  security_groups = [dependency.sg.outputs.this_security_group_id]
 
+//  target_group_arns	= list(dependency.nlb.outputs.sentry_target_group_arns)
 
-  ebs_block_device = [
-    {
-      device_name = "/dev/xvdz"
-      volume_type = "gp2"
-      volume_size = "50"
-      delete_on_termination = true
-    }
-  ]
+//  ebs_block_device = [
+//    {
+//      device_name = "/dev/xvdz"
+//      volume_type = "gp2"
+//      volume_size = "50"
+//      delete_on_termination = true
+//    }
+//  ]
 
+  //TODO: Trim this
   root_block_device = [
     {
       volume_size = "20"
@@ -65,7 +62,9 @@ inputs = {
   # Auto scaling group
   asg_name = "p-rep-sentry-asg"
   vpc_zone_identifier = dependency.vpc.outputs.public_subnets
+
   health_check_type = "EC2"
+  //  TODO Verify ^^
   min_size = 1
   max_size = 3
   desired_capacity = 1

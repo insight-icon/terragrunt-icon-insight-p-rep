@@ -17,7 +17,8 @@
     "aws/modules/terraform-aws-icon-peering-mgmt": "https://github.com/robc-io/terraform-aws-icon-peering-mgmt",
     "aws/modules/terraform-aws-icon-nlb": "https://github.com/robc-io/terraform-aws-icon-nlb",
     "aws/modules/terraform-aws-icon-node-configuration": "https://github.com/anocendi/terraform-aws-icon-node-configuration",
-    "scripts/icon-prep-network-setup": "https://github.com/block42-blockchain-company/icon-prep-network-setup",
-    "scripts/rhizome-node-toolbox": "https://github.com/rhizomeicx/rhizome-node-toolbox"
+    "scripts/icon-prep-network-setup": "https://github.com/block42-blockchain-company/i`-prep-network-setup",
+    "scripts/rhizome-node-toolbox": "https://github.com/rhizomeicx/rhizome-node-toolbox",
+    "aws/modules/icon-node-monitor": "https://github.com/robc-io/icon-node-monitor"
   }
 }
