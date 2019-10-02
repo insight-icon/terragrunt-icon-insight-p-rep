@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: icon-ingress-nginx-ingress-controller
+data:
+  force-ssl-redirect: "false"
+  ssl-redirect: "false"
+  use-proxy-protocol: "false"

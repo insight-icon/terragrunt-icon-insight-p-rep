@@ -1,0 +1,228 @@
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+      slack_api_url: https://hooks.slack.com/services/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
+    route:
+      group_by: ['job']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      routes:
+        - match:
+            kind: docker-host-alerts
+          receiver: 'slack'
+        - match:
+            alertname: Watchdog
+          receiver: 'null'
+    receivers:
+      - name: 'slack'
+        slack_configs:
+          - channel: '#monitoring'
+            icon_url: https://avatars3.githubusercontent.com/u/3380462
+            send_resolved: true
+            title: |-
+              [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if or (and (eq (len .Alerts.Firing) 1) (eq (len .Alerts.Resolved) 0)) (and (eq (len .Alerts.Firing) 0) (eq (len .Alerts.Resolved) 1)) }}{{ range .Alerts.Firing }}{{ .Labels.alertname }} @ {{ .Annotations.identifier }}{{ end }}{{ range .Alerts.Resolved }}{{ .Labels.alertname }} @ {{ .Annotations.identifier }}{{ end }}{{ end }}
+            text: |-
+              {{ if or (and (eq (len .Alerts.Firing) 1) (eq (len .Alerts.Resolved) 0)) (and (eq (len .Alerts.Firing) 0) (eq (len .Alerts.Resolved) 1)) }}
+              {{ range .Alerts.Firing }}{{ .Annotations.description }}{{ end }}{{ range .Alerts.Resolved }}{{ .Annotations.description }}{{ end }}
+              {{ else }}
+              {{ if gt (len .Alerts.Firing) 0 }}
+              *Alerts Firing:*
+              {{ range .Alerts.Firing }}- {{ .Annotations.identifier }}: {{ .Annotations.description }}
+              {{ end }}{{ end }}
+              {{ if gt (len .Alerts.Resolved) 0 }}
+              *Alerts Resolved:*
+              {{ range .Alerts.Resolved }}- {{ .Annotations.identifier }}: {{ .Annotations.description }}
+              {{ end }}{{ end }}
+              {{ end }}
+      - name: 'null'
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    hosts: [alertman.us-east-1.aws.patchnotes.xyz]
+  service:
+    type: NodePort
+  alertmanagerSpec:
+    externalUrl: http://alertman.us-east-1.aws.patchnotes.xyz
+
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    hosts: [grafana.us-east-1.aws.patchnotes.xyz]
+  service:
+    type: NodePort
+
+additionalPrometheusRules:
+  - name: node-rules
+    groups:
+      - name: docker-hosts
+        rules:
+        - alert: docker-node-high-cpu
+          expr: node_load1{job = "consul_node_exporter"} > 6
+          for: 1m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has had high CPU load for more than 1 minute (current value: {{ $value | printf "%.2f" }})'
+        - alert: docker-node-down
+          expr: up{job = "consul_node_exporter"} == 0
+          for: 1m
+          labels:
+            severity: critical
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has been down for more than 1 minute.'
+        - alert: docker-node-low-root-disk
+          expr: node_filesystem_avail_bytes{mountpoint="/"} / 1000000000 < 5
+          for: 5m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has less than 5GB of free disk space on the root file system (current value: {{ $value | printf "%.2f" }}GB)'
+        - alert: docker-node-low-data-disk
+          expr: node_filesystem_avail_bytes{mountpoint="/data"} / 1000000000 < 25
+          for: 5m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has had less than 25GB of free disk space on the root file system (current value: {{ $value | printf "%.2f" }}GB)'
+        - alert: docker-node-low-root-disk-ratio
+          expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 25
+          for: 5m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has less than 25% of free disk space on the root file system (current value: {{ $value | printf "%.2f" }}%)'
+        - alert: docker-node-low-data-disk-ratio
+          expr: (node_filesystem_avail_bytes{mountpoint="/data"} / node_filesystem_size_bytes{mountpoint="/data"}) * 100 < 25
+          for: 5m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has had less than 25% of free disk space on the root file system (current value: {{ $value | printf "%.2f" }}%)'
+        - alert: docker-node-low-free-mem-ratio
+          expr: node_memory_MemFree_bytes{job="consul_node_exporter"}/node_memory_MemTotal_bytes{job="consul_node_exporter"} * 100 < 25
+          for: 1m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has had less than 25% of free RAM available for 1 minute (current value: {{ $value | printf "%.2f" }}%)'
+        - alert: docker-no-containers-running
+          expr: engine_daemon_container_states_containers{state="running"} == 0
+          for: 1m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has had no docker containers running for 1 minute.'
+        - alert: docker-failed-health-check
+          expr: engine_daemon_health_checks_failed_total > 0
+          for: 1m
+          labels:
+            severity: warning
+            kind: docker-host-alerts
+          annotations:
+            identifier: '{{ $labels.instance }}'
+            description: '{{ $labels.instance }} has had a docker container fail a health check.'
+
+prometheus:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    hosts: [prometheus.us-east-1.aws.patchnotes.xyz]
+  service:
+    type: NodePort
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp2
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
+    externalUrl: http://prometheus.us-east-1.aws.patchnotes.xyz
+    additionalScrapeConfigs:
+      - job_name: consul
+        metrics_path: /v1/agent/metrics
+        params:
+          format: [prometheus]
+          help: [yes]
+        scrape_interval: 30s
+        scrape_timeout:  10s
+        consul_sd_configs:
+          - server:   consul.service.consul:8500
+            datacenter: us-east-1
+            services: [consul]
+            allow_stale: true
+            refresh_interval: 5m
+        relabel_configs:
+          - source_labels: [__meta_consul_service]
+            regex:         (.*)
+            target_label:  job
+            replacement:   $1
+          - source_labels: [__meta_consul_node]
+            regex:         (.*)
+            target_label:  instance
+            replacement:   $1
+          - source_labels: [__address__]
+            separator:     ':'
+            regex:         (.*):(8300)
+            target_label:  __address__
+            replacement:   ${1}:8500
+
+      - job_name: host-prometheus
+        metrics_path: /metrics
+        scrape_interval: 10s
+        scrape_timeout:  10s
+        consul_sd_configs:
+          - server:   consul.service.consul:8500
+            datacenter: us-east-1
+            services: [consul_node_exporter]
+            allow_stale: true
+            refresh_interval: 5m
+        relabel_configs:
+          - source_labels: [__meta_consul_tags]
+            regex:         (.*)
+            target_label:  service
+            replacement:   $1
+          - source_labels: [__meta_consul_service]
+            regex:         (.*)
+            target_label:  job
+            replacement:   $1
+          - source_labels: [__meta_consul_service_id]
+            regex:         (.*)
+            target_label:  instance
+            replacement:   $1
+          - source_labels: [__meta_consul_dc]
+            regex:         (.*)
+            target_label:  region
+            replacement:   $1
