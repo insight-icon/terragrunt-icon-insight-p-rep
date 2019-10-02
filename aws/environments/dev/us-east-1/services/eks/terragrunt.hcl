@@ -19,7 +19,7 @@ include {
 //}
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-services"
 }
 
 //dependency "sg" {
@@ -35,7 +35,7 @@ dependency "vpc" {
 //}
 
 inputs = {
-  cluster_name = "my-cluster"
+  cluster_name = "icon-svcs-cluster"
   subnets = dependency.vpc.outputs.public_subnets
   vpc_id = dependency.vpc.outputs.vpc_id
 

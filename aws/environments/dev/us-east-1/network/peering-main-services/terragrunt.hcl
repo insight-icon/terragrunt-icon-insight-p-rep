@@ -17,7 +17,7 @@ dependency "vpc" {
   config_path = "../vpc"
 }
 
-dependency "vpc_mgmt" {
+dependency "vpc_svc" {
   config_path = "../vpc-services"
 }
 
@@ -26,9 +26,12 @@ inputs = {
   acceptor_vpc_id = dependency.vpc.outputs.vpc_id
   acceptor_route_table_id = dependency.vpc.outputs.vpc_main_route_table_id
   acceptor_vpc_cidr_block = dependency.vpc.outputs.vpc_cidr_block
+  acceptor_pub_route_table_id = join(", ", dependency.vpc.outputs.public_route_table_ids)
 
-  requestor_vpc_id = dependency.vpc_mgmt.outputs.vpc_id
-  requestor_route_table_id = dependency.vpc_mgmt.outputs.vpc_main_route_table_id
-  requestor_vpc_cidr_block = dependency.vpc_mgmt.outputs.vpc_cidr_block
+
+  requestor_vpc_id = dependency.vpc_svc.outputs.vpc_id
+  requestor_route_table_id = dependency.vpc_svc.outputs.vpc_main_route_table_id
+  requestor_vpc_cidr_block = dependency.vpc_svc.outputs.vpc_cidr_block
+  requestor_pub_route_table_id = join(", ", dependency.vpc_svc.outputs.public_route_table_ids)
 }
 
