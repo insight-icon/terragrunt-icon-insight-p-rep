@@ -4,6 +4,8 @@ _old/
 *account.tfvars
 *configure.tfvars
 
+*.DS_Store
+
 _old/
 .idea/
 .pytest_cache

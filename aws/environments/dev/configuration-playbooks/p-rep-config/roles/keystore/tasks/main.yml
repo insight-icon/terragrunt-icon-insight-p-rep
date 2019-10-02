@@ -1,7 +1,7 @@
 - name: "Copy over the keystore"
   copy:
     src: "{{ keystore }}" 
-    dest: /home/{{ ansible_ssh_user }}/cert/{{ keystore | basename }}
+    dest: /home/ubuntu/cert/{{ keystore | basename }}
     mode: '0440'
     owner: "ubuntu"
     group: "ubuntu"

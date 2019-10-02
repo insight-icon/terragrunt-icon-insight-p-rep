@@ -45,8 +45,8 @@ inputs = {
       asg_max_size = 2
       tags = [
         {
-          key = "foo"
-          value = "bar"
+          key = "Name"
+          value = "ServicesCluster"
           propagate_at_launch = true
         }]
     }
@@ -55,6 +55,7 @@ inputs = {
   tags = {
     environment = "test"
   }
+}
 
 //  name = "node"
 //  group = "mainnet"
@@ -76,4 +77,3 @@ inputs = {
 //  log_config_bucket = dependency.log_config.outputs.log_config_bucket
 //  log_config_key = dependency.log_config.outputs.log_config_key
 //
-}

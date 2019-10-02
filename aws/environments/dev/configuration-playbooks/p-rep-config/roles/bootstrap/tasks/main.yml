@@ -5,7 +5,7 @@
 
 - name: "Mount EBS data volume under data directory"
   mount:
-    path: /home/{{ ansible_ssh_user }}/data
+    path: /home/ubuntu/data
     src: /dev/xvdf
     state: mounted
     fstype: ext4
@@ -13,12 +13,12 @@
 - name: "Copy over the docker-compose file"
   copy:
     src: ../../../data/docker-compose.yaml
-    dest: /home/{{ ansible_ssh_user }}/docker-compose.yaml
+    dest: /home/ubuntu/docker-compose.yaml
     mode: '0440'
-    owner: "{{ ansible_ssh_user }}"
-    group: "{{ ansible_ssh_user }}"
+    owner: "ubuntu"
+    group: "ubuntu"
 
 - name: "Start node application via docker-compose"
   docker_compose:
-    project_src: /home/{{ ansible_ssh_user }}
+    project_src: /home/ubuntu
     state: present
