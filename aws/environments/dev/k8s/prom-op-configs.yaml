@@ -37,28 +37,31 @@ alertmanager:
               {{ end }}{{ end }}
               {{ end }}
       - name: 'null'
+  alertmanagerSpec:
+    externalUrl: "http://alertman.us-east-1.aws.patchnotes.xyz"
   ingress:
-    enabled: true
     annotations:
-      kubernetes.io/ingress.class: "nginx"
       ingress.kubernetes.io/rewrite-target: /
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-    hosts: [alertman.us-east-1.aws.patchnotes.xyz]
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    enabled: true
+    hosts:
+      - alertman.us-east-1.aws.patchnotes.xyz
   service:
     type: NodePort
-  alertmanagerSpec:
-    externalUrl: http://alertman.us-east-1.aws.patchnotes.xyz
+
 
 grafana:
   ingress:
-    enabled: true
     annotations:
-      kubernetes.io/ingress.class: "nginx"
       ingress.kubernetes.io/rewrite-target: /
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-    hosts: [grafana.us-east-1.aws.patchnotes.xyz]
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    enabled: true
+    hosts:
+      - grafana.us-east-1.aws.patchnotes.xyz
   service:
     type: NodePort
 
@@ -151,13 +154,14 @@ additionalPrometheusRules:
 
 prometheus:
   ingress:
-    enabled: true
     annotations:
-      kubernetes.io/ingress.class: "nginx"
       ingress.kubernetes.io/rewrite-target: /
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-    hosts: [prometheus.us-east-1.aws.patchnotes.xyz]
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    enabled: true
+    hosts:
+      - prometheus.us-east-1.aws.patchnotes.xyz
   service:
     type: NodePort
   prometheusSpec:
