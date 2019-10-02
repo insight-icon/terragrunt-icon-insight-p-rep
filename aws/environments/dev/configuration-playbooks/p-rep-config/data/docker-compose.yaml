@@ -23,3 +23,14 @@ services:
       ports:
          - 9000:9000
          - 7100:7100
+
+   loop-logger:
+      image: looploy/fluentd
+      container_name: loop_logger
+      restart: always
+      network_mode: host
+      volumes:
+         - /data/:/loopchain/log
+         - ./fluent/log:/fluentd/log
+      environment:
+         LOG_SERVER_IP: "fluent-agg.us-east-1.aws.patchnotes.xyz"
