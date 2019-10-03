@@ -7,6 +7,7 @@ export TF_INPUT=0
 
 DIRECTORIES=( \
 "us-east-1/network/vpc" \
+"us-east-1/bastion/sg" \
 "us-east-1/p-rep/sg" \
 "us-east-1/bots/rhizome-icon-node-monitor" \
 )

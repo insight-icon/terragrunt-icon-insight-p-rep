@@ -13,6 +13,7 @@ DIRECTORIES=( \
 "us-east-1/p-rep/sg" \
 "us-east-1/citizen/keys" \
 "us-east-1/citizen/sg" \
+"us-east-1/bastion/sg" \
 "us-east-1/consul/dns" \
 "us-east-1/consul/ec2" \
 "us-east-1/consul/keys" \

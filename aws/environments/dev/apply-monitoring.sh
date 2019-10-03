@@ -11,6 +11,7 @@ DIRECTORIES=( \
 "us-east-1/network/vpc" \
 "us-east-1/network/vpc-services" \
 "us-east-1/network/peering-main-services" \
+"us-east-1/bastion/sg" \
 #"us-east-1/network/peering-mgmt" \
 "us-east-1/network/dns" \
 "us-east-1/logging/log-config-bucket" \
