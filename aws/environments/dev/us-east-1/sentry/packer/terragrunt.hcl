@@ -7,8 +7,8 @@ include {
 }
 
 locals {
-  repo_owner = ""
-  repo_name = ""
+  repo_owner = "robc-io"
+  repo_name = "icon-node-packer-build"
   repo_version = "master"
   repo_path = ""
   local_source = false
@@ -18,5 +18,7 @@ locals {
 
 inputs = {
   name = "sentry"
+  distro = "debian-9"
+  node = "sentry"
 }
 

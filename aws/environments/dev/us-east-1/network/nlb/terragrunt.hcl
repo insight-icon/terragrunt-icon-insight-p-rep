@@ -40,7 +40,8 @@ inputs = {
   public_subnets = dependency.vpc.outputs.public_subnets
   vpc_id = dependency.vpc.outputs.vpc_id
 
-  autoscaling_group_id = dependency.sentry_asg.outputs.this_autoscaling_group_id
+  sentry_autoscaling_group_id = dependency.sentry_asg.outputs.this_autoscaling_group_id
+
 
   tags = {}
 }

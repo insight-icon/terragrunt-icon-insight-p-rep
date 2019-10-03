@@ -20,13 +20,15 @@ dependency "vpc" {
   config_path = "../../network/vpc"
 }
 
+// Note, this is for whatever front facing EIP
 dependency "sg" {
-  config_path = "../sg"
+  config_path = "../../network/nlb-sg"
 }
 
 inputs = {
   name = "lambda-sg-cron"
-  group = "p-rep"
+  group = "network"
+  module = "nlb-sg"
 
   grpc_security_group_id = dependency.sg.outputs.grpc_security_group_id
   security_group_ids = dependency.sg.outputs.security_group_ids

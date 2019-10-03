@@ -7,6 +7,7 @@ export TF_INPUT=0
 
 DIRECTORIES=( \
 "global/profiles/p-rep" \
+"us-east-1/sentry/packer" \
 "us-east-1/logging/log-config-bucket" \
 "us-east-1/data" \
 "us-east-1/network/vpc" \
@@ -16,12 +17,15 @@ DIRECTORIES=( \
 "us-east-1/p-rep/ec2" \
 "us-east-1/p-rep/ec2-configuration" \
 "us-east-1/p-rep/dns-c1" \
-"us-east-1/sentry/sentry-user-data" \
+"us-east-1/sentry/data" \
 "us-east-1/sentry/sg" \
 "us-east-1/sentry/asg" \
-"us-east-1/network/nlb-sg" \
+"us-east-1/network/nlb-sg-grpc" \
 "us-east-1/network/nlb" \
+"us-east-1/firewalls/lambda-sg-cron-t3" \
+"us-east-1/bots/rhizome-icon-node-monitor" \
 )
+
 
 for i in "${DIRECTORIES[@]}"
 do

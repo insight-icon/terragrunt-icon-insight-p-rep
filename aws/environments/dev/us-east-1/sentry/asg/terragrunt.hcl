@@ -31,12 +31,13 @@ inputs = {
   name = "public"
   spot_price = "1"
 
-  user_data = dependency.data.outputs.sentry_user_data
+//  user_data = dependency.data.outputs.sentry_user_data
+  user_data = ""
 
   # Launch configuration
   lc_name = "p-rep-sentry-lc"
 
-  image_id = dependency.data.outputs.ubuntu_ami_id
+  image_id = dependency.data.outputs.debian_ami_id
   instance_type = "m4.2xlarge"
   security_groups = [dependency.sg.outputs.this_security_group_id]
 

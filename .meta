@@ -19,6 +19,7 @@
     "aws/modules/terraform-aws-icon-node-configuration": "https://github.com/anocendi/terraform-aws-icon-node-configuration",
     "scripts/icon-prep-network-setup": "https://github.com/block42-blockchain-company/i`-prep-network-setup",
     "scripts/rhizome-node-toolbox": "https://github.com/rhizomeicx/rhizome-node-toolbox",
-    "aws/modules/icon-node-monitor": "https://github.com/robc-io/icon-node-monitor"
+    "aws/modules/icon-node-monitor": "https://github.com/robc-io/icon-node-monitor",
+    "aws/modules/icon-node-packer-build": "https://github.com/robc-io/icon-node-packer-build"
   }
 }
