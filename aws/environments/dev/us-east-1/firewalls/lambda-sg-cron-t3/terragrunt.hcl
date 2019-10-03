@@ -22,7 +22,7 @@ dependency "vpc" {
 
 // Note, this is for whatever front facing EIP
 dependency "sg" {
-  config_path = "../../network/nlb-sg"
+  config_path = "../../network/nlb-sg-grpc"
 }
 
 inputs = {
@@ -30,8 +30,9 @@ inputs = {
   group = "network"
   module = "nlb-sg"
 
-  grpc_security_group_id = dependency.sg.outputs.grpc_security_group_id
-  security_group_ids = dependency.sg.outputs.security_group_ids
+//  TODO FIX
+  grpc_security_group_id = dependency.sg.outputs.this_security_group_id
+  security_group_ids = [dependency.sg.outputs.this_security_group_id]
 
   vpc_id = dependency.vpc.outputs.vpc_id
   subnet_ids = dependency.vpc.outputs.private_subnets

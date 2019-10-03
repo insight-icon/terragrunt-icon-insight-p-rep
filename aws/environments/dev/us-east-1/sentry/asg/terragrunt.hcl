@@ -32,7 +32,6 @@ inputs = {
   spot_price = "1"
 
 //  user_data = dependency.data.outputs.sentry_user_data
-  user_data = ""
 
   # Launch configuration
   lc_name = "p-rep-sentry-lc"

@@ -14,7 +14,7 @@ include {
 }
 
 dependency "sg" {
-  config_path = "../nlb-sg"
+  config_path = "../nlb-sg-grpc"
 }
 
 dependency "vpc" {
@@ -41,7 +41,7 @@ inputs = {
   vpc_id = dependency.vpc.outputs.vpc_id
 
   sentry_autoscaling_group_id = dependency.sentry_asg.outputs.this_autoscaling_group_id
-
+  citizen_autoscaling_group_id = dependency.sentry_asg.outputs.this_autoscaling_group_id # TODO: FIX
 
   tags = {}
 }
