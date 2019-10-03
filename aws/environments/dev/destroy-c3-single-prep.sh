@@ -6,11 +6,11 @@ export TF_PLUGIN_CACHE_DIR=~/.terraform.d/plugin-cache
 export TF_INPUT=0
 
 DIRECTORIES=( \
-"us-east-1/network/nlb" \
-"us-east-1/network/nlb-sg" \
-"us-east-1/sentry/asg" \
-"us-east-1/sentry/sg" \
-"us-east-1/sentry/sentry-user-data" \
+# "us-east-1/network/nlb" \
+# "us-east-1/network/nlb-sg" \
+# "us-east-1/sentry/asg" \
+# "us-east-1/sentry/sg" \
+# "us-east-1/sentry/sentry-user-data" \
 "us-east-1/p-rep/ec2" \
 "us-east-1/p-rep/sg" \
 "us-east-1/p-rep/keys" \
