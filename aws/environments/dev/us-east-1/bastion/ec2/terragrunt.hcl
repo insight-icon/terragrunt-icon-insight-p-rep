@@ -13,6 +13,10 @@ dependency "vpc" {
   config_path = "../../network/vpc"
 }
 
+dependency "sg" {
+  config_path = "../sg"
+}
+
 dependency "data" {
   config_path = "../../data"
 }
@@ -38,10 +42,9 @@ inputs = {
   s3_bucket_name              = dependency.s3.outputs.this_s3_bucket_id
   vpc_id                      = dependency.vpc.outputs.vpc_id
   subnet_ids                  = [dependency.vpc.outputs.public_subnets[0]]
+  bastion_security_group      = dependency.sg.outputs.this_security_group_id
   keys_update_frequency       = "5,20,35,50 * * * *"
   additional_user_data_script = "date"
-
-
 }
 
 //inputs = {

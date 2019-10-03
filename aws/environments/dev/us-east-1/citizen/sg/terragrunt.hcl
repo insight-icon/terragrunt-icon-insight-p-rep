@@ -12,9 +12,14 @@ dependency "vpc" {
   config_path = "../../network/vpc"
 }
 
+dependency "bastionsg" {
+  config_path = "../../bastion/sg"
+}
+
 inputs = {
   name = "citizen"
   vpc_id = dependency.vpc.outputs.vpc_id
+  bastion_security_group = dependency.bastionsg.outputs.this_security_group_id
 
   tags = {}
 }
