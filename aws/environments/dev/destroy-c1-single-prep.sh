@@ -8,6 +8,7 @@ export TF_INPUT=0
 DIRECTORIES=( \
 "us-east-1/p-rep/ec2" \
 #"us-east-1/p-rep/sg" \
+#"us-east-1/bastion/sg" \
 #"us-east-1/p-rep/keys" \
 #"us-east-1/network/vpc" \
 #"global/profiles/p-rep" \

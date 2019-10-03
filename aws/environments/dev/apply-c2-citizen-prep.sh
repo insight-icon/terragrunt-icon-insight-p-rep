@@ -10,6 +10,7 @@ DIRECTORIES=( \
 "global/profiles/citizen" \
 "us-east-1/logging/log-config-bucket" \
 "us-east-1/logging/lb-logging-bucket" \
+"us-east-1/bastion/sg" \
 "us-east-1/network/vpc" \
 "us-east-1/p-rep/keys" \
 "us-east-1/p-rep/sg" \

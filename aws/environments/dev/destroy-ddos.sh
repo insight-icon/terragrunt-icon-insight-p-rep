@@ -14,6 +14,7 @@ DIRECTORIES=( \
 "us-east-1/citizen/sg" \
 "us-east-1/logging/lb-logging-bucket" \
 "us-east-1/logging/log-config-bucket" \
+"us-east-1/bastion/sg" \
 "us-east-1/network/vpc" \
 "global/profiles/citizen" \
 "global/profiles/p-rep" \
