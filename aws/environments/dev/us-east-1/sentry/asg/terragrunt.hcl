@@ -6,10 +6,6 @@ include {
   path = find_in_parent_folders()
 }
 
-dependency "data" {
-  config_path = "../../data"
-}
-
 dependency "vpc" {
   config_path = "../../network/vpc"
 }
@@ -32,6 +28,7 @@ inputs = {
   spot_price = "1"
 
 //  user_data = dependency.data.outputs.sentry_user_data
+  key_name = "p-rep"
 
   # Launch configuration
   lc_name = "p-rep-sentry-lc"
