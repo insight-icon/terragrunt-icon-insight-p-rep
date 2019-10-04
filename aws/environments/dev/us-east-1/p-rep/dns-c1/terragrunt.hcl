@@ -16,7 +16,7 @@ dependency "ec2" {
 
 inputs = {
   vpc_id = dependency.vpc.outputs.vpc_id
-  hostname = "thistotallysucks.com"
+  hostname = "prep"
   private_ip = dependency.ec2.outputs.private_ip
 
   //  TODO: Fix this

@@ -1,9 +1,10 @@
 data "aws_region" "this" {}
 
+variable "domain_name" {}
+//variable "environment" {}
+variable "hostname" {}
 
 variable "vpc_id" {}
-variable "domain_name" {}
-variable "hostname" {}
 variable "private_ip" {}
 
 variable "force_destroy" {
@@ -17,7 +18,10 @@ variable "tags" {
 }
 
 locals {
-  fqdn = join(".", [var.hostname, var.domain_name])
+  fqdn = join(".", [
+    var.hostname,
+    data.aws_region.this.name,
+    var.domain_name])
 }
 
 resource "aws_route53_zone" "this" {
@@ -35,10 +39,15 @@ resource "aws_route53_zone" "this" {
 
 
 resource "aws_route53_record" "www" {
-  zone_id = "${aws_route53_zone.this.zone_id}"
-  name    = var.domain_name
-  type    = "A"
+  zone_id = aws_route53_zone.this.zone_id
+  name = local.fqdn
+  type = "A"
 
   ttl = "5"
-  records = [var.private_ip]
+  records = [
+    var.private_ip]
+}
+
+output "fqdn" {
+  value = local.fqdn
 }
