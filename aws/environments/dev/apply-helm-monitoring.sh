@@ -28,7 +28,8 @@ echo "Installing Consul chart..."
 helm install k8s/consul-helm --name icon-k8s -f k8s/consul-k8s-config.yaml
 
 echo "Installing Prometheus Operator..."
-helm install stable/prometheus-operator --name icon-prom -f k8s/prom-op-configs.yaml
+# Pinned release to --version 6.14.1 because of https://github.com/helm/charts/issues/17839
+helm install stable/prometheus-operator --name icon-prom -f k8s/prom-op-configs.yaml --version 6.14.1
 
 echo "Installing NGINX ingress controller..."
 helm install stable/nginx-ingress --name icon-ingress --set controller.metrics.enabled=true --set controller.stats.enabled=true --set controller.metrics.serviceMonitor.enabled=true --set rbac.create=true --set controller.publishService.enabled=true
