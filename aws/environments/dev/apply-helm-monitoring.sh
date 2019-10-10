@@ -36,4 +36,16 @@ helm install stable/nginx-ingress --name icon-ingress --set controller.metrics.e
 echo "Configuring ingress controller..."
 kubectl apply -f k8s/ingress-nginx.yaml
 
+echo "Waiting for ELB to spawn..."
+ELB_HOSTNAME=""
+while [ -z "$ELB_HOSTNAME" ]; do
+  echo "Waiting for end point..."
+  ELB_HOSTNAME=$(kubectl get svc icon-ingress-nginx-ingress-controller --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
+  [ -z "$ELB_HOSTNAME" ] && sleep 10
+done
+echo 'End point ready:' && echo "$ELB_HOSTNAME"
+
+echo "Creating DNS CNAME records for ELB..."
+terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir "us-east-1/network/svcs-elb-dns" -var elb_host_name="$ELB_HOSTNAME"
+
 echo "Done."
