@@ -2,7 +2,7 @@
 set -e
 
 echo "Updating kubeconfig..."
-aws eks --region us-east-1 update-kubeconfig --name icon-svcs-cluster
+aws eks --region us-east-1 update-kubeconfig --name ServicesCluster
 
 echo "Adding tiller account..."
 kubectl apply -f k8s/tiller-config.yaml

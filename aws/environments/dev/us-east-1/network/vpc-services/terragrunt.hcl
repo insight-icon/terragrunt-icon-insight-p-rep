@@ -29,6 +29,6 @@ inputs = {
     "10.1.3.0/24",
     "10.1.4.0/24",
     "10.1.5.0/24"]
-  public_subnet_tags = {"kubernetes.io/role/elb": 1, "kubernetes.io/cluster/icon-svcs-cluster": "shared"}
+  public_subnet_tags = {"kubernetes.io/role/elb": 1, "kubernetes.io/cluster/ServicesCluster": "shared"}
 }
 

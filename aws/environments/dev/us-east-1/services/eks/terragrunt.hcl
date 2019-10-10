@@ -35,7 +35,7 @@ dependency "vpc" {
 //}
 
 inputs = {
-  cluster_name = "icon-svcs-cluster"
+  cluster_name = "ServicesCluster"
   subnets = dependency.vpc.outputs.public_subnets
   vpc_id = dependency.vpc.outputs.vpc_id
 
