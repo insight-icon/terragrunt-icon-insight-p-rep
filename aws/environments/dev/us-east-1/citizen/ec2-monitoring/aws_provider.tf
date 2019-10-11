@@ -1,3 +1,13 @@
+variable "aws_region" {
+  description = "AWS region to use for all resources"
+}
+
+variable "aws_allowed_account_ids" {
+  description = "List of allowed AWS accounts where this configuration can be applied"
+  type        = list
+}
+
+
 provider "aws" {
   version = "~> 2.2"
 
