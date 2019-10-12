@@ -6,6 +6,7 @@ export TF_PLUGIN_CACHE_DIR=~/.terraform.d/plugin-cache
 export TF_INPUT=0
 
 DIRECTORIES=( \
+"us-east-1/network/svcs-elb-dns" \
 "us-east-1/citizen/ec2-monitoring" \
 "us-east-1/p-rep/ec2-monitoring" \
 "us-east-1/services/eks" \

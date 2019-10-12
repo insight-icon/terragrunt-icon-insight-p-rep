@@ -13,3 +13,14 @@ services:
       - ./keys:/citizen_pack/keys  # Automatically generate cert key files here
     ports:
       - 9000:9000
+
+  loop-logger:
+    image: looploy/fluentd
+    container_name: loop_logger
+    restart: always
+    network_mode: host
+    volumes:
+      - /data/:/loopchain/log
+      - ./fluent/log:/fluentd/log
+    environment:
+      LOG_SERVER_IP: "fluent-agg.us-east-1.aws.patchnotes.xyz"
