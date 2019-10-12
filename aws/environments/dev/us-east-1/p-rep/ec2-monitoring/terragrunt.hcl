@@ -34,6 +34,10 @@ dependency "log_config" {
   config_path = "../../logging/log-config-bucket"
 }
 
+dependency "dns" {
+  config_path = "../../network/dns"
+}
+
 inputs = {
   name = "node"
   group = "mainnet"
@@ -54,6 +58,11 @@ inputs = {
 
   log_config_bucket = dependency.log_config.outputs.log_config_bucket
   log_config_key = dependency.log_config.outputs.log_config_key
+
+  user_data_script = "user_data_ubuntu_ebs.sh"
+
+  zone_id = dependency.dns.outputs.zone_id
+  domain = "us-east-1.aws.patchnotes.xyz"
 
 //  TODO: Fix this
   tags = {}
