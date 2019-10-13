@@ -5,29 +5,18 @@ mkdir -p ~/.terraform.d/plugin-cache
 export TF_PLUGIN_CACHE_DIR=~/.terraform.d/plugin-cache
 export TF_INPUT=0
 
-DIRECTORIES=( \
-"global/profiles/p-rep" \
-"us-east-1/sentry/packer" \
-"us-east-1/logging/log-config-bucket" \
-"us-east-1/data" \
-"us-east-1/network/vpc" \
-"us-east-1/bastion/sg" \
-"us-east-1/p-rep/keys" \
-"us-east-1/p-rep/sg" \
-"us-east-1/p-rep/ec2" \
-"us-east-1/p-rep/ec2-configuration" \
-"us-east-1/p-rep/dns-c1" \
-"us-east-1/sentry/data" \
-"us-east-1/sentry/sg" \
-"us-east-1/sentry/asg" \
-"us-east-1/network/nlb-sg-grpc" \
-"us-east-1/network/nlb" \
-"us-east-1/firewalls/lambda-sg-cron-t3" \
-"us-east-1/bots/rhizome-icon-node-monitor" \
-)
+OKRED='\033[91m'
+OKGREEN='\033[92m'
+OKORANGE='\033[93m'
+RESET='\e[0m'
 
+. ./c3.sh
 
 for i in "${DIRECTORIES[@]}"
 do
-   terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir $i
+    echo -e "$OKRED*****************************************************************$RESET"
+	echo -e "$OKRED*$RESET$OKORANGE \t Applying $i\t \t $RESET$OKRED$RESET"
+	echo -e "$OKRED*****************************************************************$RESET"
+
+    terragrunt apply --terragrunt-source-update --terragrunt-non-interactive --auto-approve --terragrunt-working-dir $i
 done
