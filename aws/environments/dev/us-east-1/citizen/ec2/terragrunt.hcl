@@ -1,20 +1,28 @@
 terraform {
-//  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git?ref=0.0.1"
-//  source = "github.com/robcxyz/terraform-aws-icon-p-rep-node.git"
-  source = "../../../../../modules/terraform-aws-icon-citizen-node"
+  source = "${local.source}"
 }
-
 
 include {
   path = find_in_parent_folders()
 }
 
+locals {
+  repo_owner = "insight-infrastructure"
+  repo_name = "terraform-aws-icon-citizen-node"
+  repo_version = "master"
+  repo_path = ""
+  local_source = true
+
+  source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
+}
+
 dependency "iam" {
-  config_path = "../../../global/profiles/p-rep"
+//  config_path = "../../../global/profiles/p-rep"
+  config_path = "../iam"
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-main"
 }
 
 dependency "sg" {
@@ -29,8 +37,14 @@ dependency "log_config" {
   config_path = "../../logging/log-config-bucket"
 }
 
+dependency "packer" {
+  config_path = "../packer"
+}
+
 inputs = {
   name = "citizen"
+
+  ami_id = dependency.packer.outputs.ami_id
 
   volume_dir = ""
   ebs_volume_size = 100
