@@ -7,7 +7,7 @@ include {
 }
 
 locals {
-  repo_owner = "robc-io"
+  repo_owner = "insight-infrastructure"
   repo_name = "terraform-aws-icon-p-rep-node"
   repo_version = "master"
   repo_path = ""
@@ -17,11 +17,12 @@ locals {
 }
 
 dependency "iam" {
-  config_path = "../../../global/profiles/p-rep"
+//  config_path = "../../../global/profiles/p-rep"
+  config_path = "../iam"
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-main"
 }
 
 dependency "sg" {
@@ -37,10 +38,8 @@ dependency "log_config" {
 }
 
 inputs = {
-  name = "node"
-  group = "mainnet"
+  name = "prep"
 
-  volume_dir = ""
   ebs_volume_size = 100
   root_volume_size = "20"
   instance_type = "m4.large"
@@ -50,7 +49,7 @@ inputs = {
   public_key = dependency.keys.outputs.public_key
 
   security_groups = dependency.sg.outputs.security_group_ids
-  subnet_id = dependency.vpc.outputs.public_subnets[0]
+  subnet_id = dependency.vpc.outputs.private_subnets[0]
 
   instance_profile_id = dependency.iam.outputs.instance_profile_id
 
@@ -58,5 +57,7 @@ inputs = {
   log_config_key = dependency.log_config.outputs.log_config_key
 
 //  TODO: Fix this
-  tags = {}
+  tags = {
+    Network = "TestNet"
+  }
 }
