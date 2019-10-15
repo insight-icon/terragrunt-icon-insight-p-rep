@@ -34,7 +34,7 @@ dependency "log_config" {
 }
 
 inputs = {
-  spot_price = 1.8  // This is above the on-demand and we should not get triggered out though in MainNet this is not OK
+//  spot_price = 1.8  // This is above the on-demand and we should not get triggered out though in MainNet this is not OK
 
   resource_group = "node"
   group = "mainnet"
@@ -42,7 +42,7 @@ inputs = {
   volume_dir = ""
   ebs_volume_size = 200
   root_volume_size = "20"
-  instance_type = "c4.8xlarge"
+  instance_type = "c4.4xlarge"
   volume_path = "/dev/sdf"
 
   key_name = dependency.keys.outputs.key_name
