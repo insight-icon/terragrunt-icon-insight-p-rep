@@ -10,6 +10,8 @@
 - Rename vpcs by full name 
 - Give account alias and index buckets with that naming instead of account_id 
     - Need to put in init dir 
+- Track AMIs better with packer for whole life cycle 
+
 
 ### Long Term 
 
