@@ -9,15 +9,20 @@ include {
 locals {
   name = "bastion-sg"
   description = "Security group for bastion only allowing ssh access from coporate ip"
-  coporate_ip = "${yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("common_vars.yaml")}"))["coporate_ip"]}"
+
+  common_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("common_vars.yaml")}"))
+  account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
+
+  coporate_ip = local.account_vars["corporate_ip"]
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-mgmt"
 }
 
 inputs = {
   name = local.name
+
   description = local.description
   vpc_id = dependency.vpc.outputs.vpc_id
 
@@ -27,7 +32,7 @@ inputs = {
       to_port = 22
       protocol = "tcp"
       description = "SSH ingress access from coporate ip only"
-      cidr_blocks = local.coporate_ip
+      cidr_blocks = "${local.coporate_ip}/32"
     },
   ]
 

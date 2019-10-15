@@ -10,6 +10,8 @@ inputs = {
   bucket = "public-keys-${get_aws_account_id()}"
   acl    = "private"
 
+  force_destroy = true
+
   versioning = {
     enabled = true
   }
