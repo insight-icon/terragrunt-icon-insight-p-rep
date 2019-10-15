@@ -30,6 +30,9 @@ RESET='\e[0m'
 CONFIG=""
 OPS=""
 
+declare -a STACK
+NUM_STEPS=0
+
 #############################################################################
 # Functions 
 #############################################################################
@@ -101,27 +104,39 @@ OPS="$2"
 CONFIG_PATH="$CONFIG_DIR/$CONFIG.json"
 [[ ! -f "$CONFIG_PATH" ]] && { echo >&2 "Configuration at $CONFIG_PATH not found. Aborting!"; exit 1; }
 
+# Make sure it is a valid json file. If not, abort.
+jq -e "." "$CONFIG_PATH" > /dev/null 2>&1 || { echo >&2 "$CONFIG_PATH is not a valid JSON file. Aborting!"; exit 4; }
+
+# Read in the stack
+while read -r line;
+do
+	STACK+=("$line")
+done < <(jq -rc ".stack[]" "$CONFIG_PATH")
+
+# Number of steps in the stack
+NUM_STEPS=${#STACK[@]}
+
 # Apply the steps for configuration given for specified operation
 case "${OPS}" in
 	"apply")
-		while read -r step;
-		do 
-			show_current_step "${CONFIG}" "${OPS}" "$step"
+		for (( i = 0 ; i < NUM_STEPS; i++))
+		do
+			show_current_step "${CONFIG}" "${OPS}" "${STACK[i]}"
 			terragrunt apply --terragrunt-source-update \
 				--terragrunt-non-interactive \
 				--auto-approve \
-				--terragrunt-working-dir "$step"
-		done < <(jq -rc ".operations.${OPS}[]" "$CONFIG_PATH")
+				--terragrunt-working-dir "${STACK[i]}"
+		done
 	;;
 	"destroy")
-		while read -r step;
-		do 
-			show_current_step "${CONFIG}" "${OPS}" "$step"
+		for (( i = NUM_STEPS - 1 ; i >= 0; i--))
+		do
+			show_current_step "${CONFIG}" "${OPS}" "${STACK[i]}"
 			terragrunt destroy --terragrunt-source-update \
 				--terragrunt-non-interactive \
 				--auto-approve \
-				--terragrunt-working-dir "$step"
-		done < <(jq -rc ".operations.${OPS}[]" "$CONFIG_PATH")
+				--terragrunt-working-dir "${STACK[i]}"
+		done
 	;;
 	*)
 		echo "Unknown operation. Aborting!"
