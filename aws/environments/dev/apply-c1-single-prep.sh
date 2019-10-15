@@ -8,7 +8,7 @@ export TF_INPUT=0
 DIRECTORIES=( \
 "global/profiles/p-rep" \
 "us-east-1/logging/log-config-bucket" \
-"us-east-1/network/vpc" \
+"us-east-1/network/vpc-main" \
 "us-east-1/p-rep/keys" \
 "us-east-1/bastion/sg" \
 "us-east-1/p-rep/sg" \

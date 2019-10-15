@@ -7,7 +7,7 @@ include {
 }
 
 locals {
-  repo_owner = "robc-io"
+  repo_owner = "insight-infrastructure"
   repo_name = "terraform-aws-icon-node-iam"
   repo_version = "v0.2.0"
   repo_path = ""

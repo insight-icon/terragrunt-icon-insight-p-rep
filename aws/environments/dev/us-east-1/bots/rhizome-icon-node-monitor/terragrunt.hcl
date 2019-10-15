@@ -24,7 +24,7 @@ locals {
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-main"
 }
 
 dependency "sg" {

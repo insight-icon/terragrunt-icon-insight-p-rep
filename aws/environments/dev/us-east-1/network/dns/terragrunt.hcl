@@ -17,7 +17,7 @@ locals {
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc-support"
+  config_path = "../../network/vpc-main"
 }
 
 inputs = {
