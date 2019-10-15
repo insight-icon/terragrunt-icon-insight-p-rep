@@ -18,7 +18,7 @@ locals {
 
 inputs = {
   name = "sentry"
-  distro = "debian-9"
+  distro = "ubuntu-18"
   node = "sentry"
 }
 

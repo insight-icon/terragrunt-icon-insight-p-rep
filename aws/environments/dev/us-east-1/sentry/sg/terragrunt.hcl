@@ -17,31 +17,42 @@ locals {
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-main"
 }
 
 inputs = {
   name = "sentry"
   description = "Security group for sentry asg"
-  vpc_id      = dependency.vpc.outputs.vpc_id
+  vpc_id = dependency.vpc.outputs.vpc_id
 
   ingress_with_cidr_blocks = [
-//    grpc rules overlayed by another module
-//    TODO: REMOVE THIS
+    //    grpc rules overlayed by another module
+    //    TODO: REMOVE THIS
     {
-      from_port   = 7100
-      to_port     = 7100
-      protocol    = "tcp"
+      from_port = 7100
+      to_port = 7100
+      protocol = "tcp"
       description = "grpc ingress"
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
+      from_port = 22
+      to_port = 22
+      protocol = "tcp"
       description = "grpc ingress"
       cidr_blocks = "0.0.0.0/0"
-    }
+    },
   ]
+
+  egress_with_cidr_blocks = [
+    {
+      from_port = 0
+      to_port = 65535
+      protocol = -1
+      description = "Egress access open to all"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+//  egress_cidr_blocks = ["0.0.0.0/0"]
 }
 

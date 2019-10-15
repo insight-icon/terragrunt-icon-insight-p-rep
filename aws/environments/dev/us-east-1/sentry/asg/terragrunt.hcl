@@ -7,7 +7,7 @@ include {
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-main"
 }
 
 dependency "sg" {
@@ -24,14 +24,14 @@ dependency "data" {
 
 
 inputs = {
-  name = "public"
+  name = "sentry"
   spot_price = "1"
 
 //  user_data = dependency.data.outputs.sentry_user_data
   key_name = "p-rep"
 
   # Launch configuration
-  lc_name = "p-rep-sentry-lc"
+  lc_name = "prep-sentry-lc"
 
   image_id = dependency.data.outputs.debian_ami_id
   instance_type = "m4.2xlarge"
@@ -58,7 +58,8 @@ inputs = {
 
   # Auto scaling group
   asg_name = "p-rep-sentry-asg"
-  vpc_zone_identifier = dependency.vpc.outputs.public_subnets
+
+  vpc_zone_identifier = dependency.vpc.outputs.private_subnets
 
   health_check_type = "EC2"
   //  TODO Verify ^^
