@@ -17,7 +17,7 @@ locals {
 }
 
 dependency "vpc" {
-  config_path = "../vpc"
+  config_path = "../vpc-main"
 }
 
 inputs = {
