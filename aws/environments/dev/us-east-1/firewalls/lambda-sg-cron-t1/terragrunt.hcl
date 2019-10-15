@@ -17,7 +17,7 @@ locals {
 }
 
 dependency "vpc" {
-  config_path = "../../network/vpc"
+  config_path = "../../network/vpc-main"
 }
 
 // Note, this is for whatever front facing EIP
