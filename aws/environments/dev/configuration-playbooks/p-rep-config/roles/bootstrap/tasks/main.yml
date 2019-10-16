@@ -12,8 +12,8 @@
 
 - name: "Copy over the docker-compose file"
   copy:
-    src: ../../../data/docker-compose.yaml
-    dest: /home/ubuntu/docker-compose.yaml
+    src: ../../../data/docker-compose.yml
+    dest: /home/ubuntu/docker-compose.yml
     mode: '0440'
     owner: "ubuntu"
     group: "ubuntu"
