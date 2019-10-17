@@ -1,6 +1,8 @@
 data "aws_region" "this" {}
 
-variable "domain_name" {}
+variable "private_tld" {
+  default = "consul"
+}
 //variable "environment" {}
 variable "hostname" {}
 
@@ -25,7 +27,7 @@ locals {
   fqdn = join(".", [
     var.hostname,
     data.aws_region.this.name,
-    var.domain_name])
+    var.private_tld])
 }
 
 //resource "aws_route53_zone" "this" {

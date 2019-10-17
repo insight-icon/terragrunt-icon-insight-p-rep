@@ -42,7 +42,7 @@ inputs = {
 
   ebs_volume_size = 100
   root_volume_size = "20"
-  instance_type = "m4.large"
+  instance_type = "c4.xlarge"
   volume_path = "/dev/sdf"
 
   key_name = dependency.keys.outputs.key_name
