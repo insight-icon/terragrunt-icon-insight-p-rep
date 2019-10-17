@@ -14,12 +14,17 @@
     "aws/modules/terraform-aws-subdomain-acm": "https://github.com/robc-io/terraform-aws-subdomain-acm",
     "aws/modules/terraform-aws-icon-iam": "https://github.com/robc-io/terraform-aws-icon-iam",
     "aws/modules/tf_aws_bastion_s3_keys_tmp": "https://github.com/robc-io/tf_aws_bastion_s3_keys_tmp",
-    "aws/modules/terraform-aws-icon-peering-mgmt": "https://github.com/robc-io/terraform-aws-icon-peering-mgmt",
+    "aws/modules/terraform-aws-icon-peering": "https://github.com/insight-infrastructure/terraform-aws-icon-peering",
+    "aws/modules/terraform-aws-peering-main": "https://github.com/insight-infrastructure/terraform-aws-peering-main",
+    "aws/modules/terraform-aws-icon-dns-setup": "https://github.com/insight-infrastructure/terraform-aws-icon-dns-setup",
     "aws/modules/terraform-aws-icon-nlb": "https://github.com/robc-io/terraform-aws-icon-nlb",
     "aws/modules/terraform-aws-icon-node-configuration": "https://github.com/anocendi/terraform-aws-icon-node-configuration",
     "scripts/icon-prep-network-setup": "https://github.com/block42-blockchain-company/i`-prep-network-setup",
     "scripts/rhizome-node-toolbox": "https://github.com/rhizomeicx/rhizome-node-toolbox",
     "aws/modules/icon-node-monitor": "https://github.com/robc-io/icon-node-monitor",
+    "aws/modules/sentry-pack": "https://github.com/robc-io/sentry-pack",
+    "aws/modules/p-rep-pack": "https://github.com/anocendi/p-rep-pack",
+    "aws/modules/citizen-pack": "https://github.com/anocendi/citizen-pack",
     "aws/modules/icon-node-packer-build": "https://github.com/robc-io/icon-node-packer-build"
   }
 }

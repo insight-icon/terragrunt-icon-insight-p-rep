@@ -36,6 +36,13 @@ inputs = {
       cidr_blocks = "0.0.0.0/0"
     },
     {
+      from_port = 9000
+      to_port = 7100
+      protocol = "tcp"
+      description = "grpc ingress"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
       from_port = 22
       to_port = 22
       protocol = "tcp"

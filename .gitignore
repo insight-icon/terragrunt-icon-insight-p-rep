@@ -2,7 +2,10 @@
 _old/
 
 *account.tfvars
+*account.yaml
+
 *configure.tfvars
+*configure.yaml
 
 *.DS_Store
 
