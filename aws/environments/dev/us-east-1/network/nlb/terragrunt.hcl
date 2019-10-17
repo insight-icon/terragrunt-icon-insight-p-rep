@@ -1,20 +1,23 @@
 terraform {
-//  source = "github.com/${local.repo_owner}/${local.repo_name}.git?ref=0.1.0"
-//  source = "github.com/${local.repo_owner}/${local.repo_name}.git"
-  source = "../../../../../modules/${local.repo_name}"
-}
-
-locals {
-  repo_owner = "robc-io"
-  repo_name = "terraform-aws-icon-nlb"
+  source = "${local.source}"
 }
 
 include {
   path = find_in_parent_folders()
 }
 
-dependency "sg" {
-  config_path = "../nlb-sg-grpc"
+locals {
+  repo_owner = "insight-infrastructure"
+  repo_name = "terraform-aws-icon-nlb"
+  repo_version = "master"
+  repo_path = ""
+  local_source = true
+
+  source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
+}
+
+dependency "eip" {
+  config_path = "../nlb-eip"
 }
 
 dependency "vpc" {
@@ -25,20 +28,20 @@ dependency "sentry_asg" {
   config_path = "../../sentry/asg"
 }
 
-//dependency "alb_p_rep_log_bucket" {
-//  config_path = "../alb-p-rep-log-bucket"
-//}
+dependency "lb_logging_bucket" {
+  config_path = "../../logging/lb-logging-bucket"
+}
 
 inputs = {
-//  log_bucket_name = dependency.alb_p_rep_log_bucket.outputs.aws_logs_bucket
-//  log_bucket_name = "p-rep-alb-logs-${get_aws_account_id()}"
-//  log_location_prefix = "p-rep-alb-logs"
-
   name = "prep-nlb"
-  //  security_groups = [dependency.sg.outputs.security_group_ids[0]]
-  security_groups = [dependency.sg.outputs.this_security_group_id]
+
+  log_bucket_name = dependency.lb_logging_bucket.outputs.bucket
+  log_location_prefix = "nlb"
+
   public_subnets = dependency.vpc.outputs.public_subnets
   vpc_id = dependency.vpc.outputs.vpc_id
+
+  eip_id = dependency.eip.outputs.eip_id
 
   sentry_autoscaling_group_id = dependency.sentry_asg.outputs.this_autoscaling_group_id
   citizen_autoscaling_group_id = dependency.sentry_asg.outputs.this_autoscaling_group_id # TODO: FIX
