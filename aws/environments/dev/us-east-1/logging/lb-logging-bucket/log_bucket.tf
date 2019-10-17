@@ -35,3 +35,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     }
   }
 }
+
+output "bucket" {
+  value = aws_s3_bucket.log_bucket.bucket
+}
