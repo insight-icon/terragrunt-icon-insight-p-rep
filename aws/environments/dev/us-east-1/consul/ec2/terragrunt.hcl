@@ -21,6 +21,10 @@ dependency "vpc_mgmt" {
   config_path = "../../network/vpc-mgmt"
 }
 
+dependency "bastion_sg" {
+  config_path = "../../bastion/sg"
+}
+
 dependency "keys" {
   config_path = "../keys"
 }
@@ -47,6 +51,8 @@ inputs = {
     dependency.vpc_services.outputs.vpc_cidr_block,
     dependency.vpc_mgmt.outputs.vpc_cidr_block]
 
+  allowed_inbound_ssh_security_group_ids  = [dependency.bastion_sg.outputs.this_security_group_id]
+
   user_data = <<-EOF
                     #!/bin/bash
                     set -e
@@ -61,10 +67,11 @@ inputs = {
                     CONSULCONFIG
                     /opt/consul/bin/run-consul --server --cluster-tag-key consul-servers --cluster-tag-value auto-join
                 EOF
+
   cluster_size = 3
   cluster_tag_key = "consul-servers"
   cluster_tag_value = "auto-join"
   availability_zones = dependency.vpc_support.outputs.azs
-  subnet_ids = dependency.vpc_support.outputs.public_subnets
+  subnet_ids = dependency.vpc_support.outputs.private_subnets
   ssh_key_name = dependency.keys.outputs.key_name
 }
