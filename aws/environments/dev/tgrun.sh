@@ -37,23 +37,28 @@ NUM_STEPS=0
 # Functions 
 #############################################################################
 
+# Arguments: Dependent commandline utility
+function check_dep() {
+	command -v "$1" >/dev/null 2>&1 || \
+		{ echo >&2 "Requires $1 to run, but is not installed. Aborting!"; exit 1; }
+}
+
 # Arguments: None
 function check_deps() {
 	# Check terraform which is a dependency
-	command -v terraform >/dev/null 2>&1 || \
-		{ echo >&2 "Requires terraform to run, but is not installed. Aborting!"; exit 1; }
+	check_dep terraform
 
 	# Check terragrunt which is a dependency
-	command -v terragrunt >/dev/null 2>&1 || \
-		{ echo >&2 "Requires terragrunt to run, but is not installed. Aborting!"; exit 1; }
+	check_dep terragrunt
 
-	# Check terragrunt which is a dependency
-	command -v ansible >/dev/null 2>&1 || \
-		{ echo >&2 "Requires ansible to run, but is not installed. Aborting!"; exit 1; }
+	# Check ansible which is a dependency
+	check_dep ansible
 
 	# Check jq which is a dependency
-	command -v jq >/dev/null 2>&1 || \
-		{ echo >&2 "Requires jq to run, but is not installed. Aborting!"; exit 1; }
+	check_dep jq
+	
+	# Check yq which is a dependency
+	check_dep yq
 }
 
 # Arguments: None
@@ -79,6 +84,22 @@ function show_current_step() {
 	echo ""
 }
 
+# Arguments: Terragrunt config directory to run
+function tg_apply_step() {
+	terragrunt apply --terragrunt-source-update \
+			--terragrunt-non-interactive \
+			--auto-approve \
+			--terragrunt-working-dir "$1"
+}
+
+# Arguments: Terragrunt config directory to run
+function tg_destroy_step() {
+	terragrunt destroy --terragrunt-source-update \
+			--terragrunt-non-interactive \
+			--auto-approve \
+			--terragrunt-working-dir "$1"
+}
+
 #############################################################################
 # Entry Point 
 #############################################################################
@@ -101,17 +122,17 @@ OPS="$2"
 [[ ! -d "$CONFIG_DIR" ]] && { echo >&2 "Configuration directory not found. Aborting!"; exit 1; }
 
 # If the config specified does not exist, abort.
-CONFIG_PATH="$CONFIG_DIR/$CONFIG.json"
+CONFIG_PATH="$CONFIG_DIR/$CONFIG.yml"
 [[ ! -f "$CONFIG_PATH" ]] && { echo >&2 "Configuration at $CONFIG_PATH not found. Aborting!"; exit 1; }
 
-# Make sure it is a valid json file. If not, abort.
-jq -e "." "$CONFIG_PATH" > /dev/null 2>&1 || { echo >&2 "$CONFIG_PATH is not a valid JSON file. Aborting!"; exit 4; }
+# Make sure it is a valid YAML file. If not, abort.
+yq -e "." "$CONFIG_PATH" > /dev/null 2>&1 || { echo >&2 "$CONFIG_PATH is not a valid YAML file. Aborting!"; exit 4; }
 
 # Read in the stack
 while read -r line;
 do
 	STACK+=("$line")
-done < <(jq -rc ".stack[]" "$CONFIG_PATH")
+done < <(yq -rc '.stack[]' "$CONFIG_PATH")
 
 # Number of steps in the stack
 NUM_STEPS=${#STACK[@]}
@@ -122,20 +143,14 @@ case "${OPS}" in
 		for (( i = 0 ; i < NUM_STEPS; i++))
 		do
 			show_current_step "${CONFIG}" "${OPS}" "${STACK[i]}"
-			terragrunt apply --terragrunt-source-update \
-				--terragrunt-non-interactive \
-				--auto-approve \
-				--terragrunt-working-dir "${STACK[i]}"
+			tg_apply_step "${STACK[i]}"
 		done
 	;;
 	"destroy")
 		for (( i = NUM_STEPS - 1 ; i >= 0; i--))
 		do
 			show_current_step "${CONFIG}" "${OPS}" "${STACK[i]}"
-			terragrunt destroy --terragrunt-source-update \
-				--terragrunt-non-interactive \
-				--auto-approve \
-				--terragrunt-working-dir "${STACK[i]}"
+			tg_destroy_step "${STACK[i]}"
 		done
 	;;
 	*)
