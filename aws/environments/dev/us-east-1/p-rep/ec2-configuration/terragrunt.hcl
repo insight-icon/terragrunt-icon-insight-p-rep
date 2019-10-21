@@ -16,21 +16,25 @@ locals {
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
 }
 
-dependency "p-rep_ec2" {
+dependency "ec2" {
   config_path = "../ec2"
+}
+
+dependency "bastion" {
+  config_path = "../../bastion/dns"
 }
 
 inputs = {
   name = "p-rep-node-configuration"
-  eip = dependency.p-rep_ec2.outputs.public_ip
+  eip = dependency.ec2.outputs.private_ip
 
   config_user = "ubuntu"
 
-  config_playbook_file = "${get_terragrunt_dir()}/p-rep-config/configure.yml"
-  config_playbook_roles_dir = "${get_terragrunt_dir()}/p-rep-config/roles"
+  bastion_dns = dependency.bastion.outputs.public_fqdn
+  bastion_user = "ubuntu" # TODO: Make relative with output from packer when built that way
 
-//  config_playbook_file = "${get_parent_terragrunt_dir()}/configuration-playbooks/p-rep-config/configure.yml"
-//  config_playbook_roles_dir = "${get_parent_terragrunt_dir()}/configuration-playbooks/p-rep-config/roles"
+  config_playbook_file = "${get_parent_terragrunt_dir()}/configuration-playbooks/p-rep-config/configure.yml"
+  config_playbook_roles_dir = "${get_parent_terragrunt_dir()}/configuration-playbooks/p-rep-config/roles"
 
   //TODO: Will fix this if I need to provide tags
   tags = {}
