@@ -7,7 +7,7 @@ include {
 }
 
 locals {
-  name = "bastion-sg"
+  name = "services-sg"
   description = "Security group for support cluster only allowing http(s) / ssh access from bastion"
 
   common_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("common_vars.yaml")}"))
@@ -21,7 +21,7 @@ dependency "vpc" {
 }
 
 dependency "bastion" {
-  config_path = "../../bastion/vpc-mgmt"
+  config_path = "../../bastion/sg"
 }
 
 inputs = {
