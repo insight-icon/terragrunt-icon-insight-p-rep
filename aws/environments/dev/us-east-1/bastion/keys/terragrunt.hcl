@@ -8,8 +8,6 @@ include {
 
 locals {
   account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
-
-  local_public_key = local.account_vars["local_public_key"]
 }
 
 dependency "s3" {

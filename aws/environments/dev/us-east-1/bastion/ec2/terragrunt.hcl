@@ -7,15 +7,20 @@ include {
 }
 
 locals {
-  repo_owner = "robc-io"
-  repo_name = "tf_aws_bastion_s3_keys_tmp"
+  repo_owner = "insight-infrastructure"
+  repo_name = "terraform-aws-icon-p-rep-node"
   repo_version = "master"
   repo_path = ""
   local_source = true
 
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
+
+  account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
 }
-//  TODO When tf12 PR goes through then use this one https://github.com/terraform-community-modules/tf_aws_bastion_s3_keys/pull/56
+
+dependency "iam" {
+  config_path = "../iam"
+}
 
 dependency "vpc" {
   config_path = "../../network/vpc-mgmt"
@@ -25,46 +30,40 @@ dependency "sg" {
   config_path = "../sg"
 }
 
-dependency "data" {
-  config_path = "../../data"
+dependency "user_data" {
+  config_path = "../user-data"
 }
 
-dependency "s3" {
-  config_path = "../keys-bucket"
+dependency "log_config" {
+  config_path = "../../logging/log-config-bucket"
 }
 
-dependency "profile" {
-//  config_path = "../../../global/profiles/bastion"
-  config_path = "../iam"
+//TODO TMP
+dependency "keys" {
+  config_path = "../../p-rep/keys"
 }
 
-
-
-
-// TODO keep this
 inputs = {
   name = "bastion"
 
-//  allowed_security_groups = [""]
+  create_eip = true
 
-  instance_type               = "t2.micro"
-  ami                         = dependency.data.outputs.ubuntu_ami_id
-  iam_instance_profile        = dependency.profile.outputs.instance_profile_id
-  s3_bucket_name              = dependency.s3.outputs.this_s3_bucket_id
-  vpc_id                      = dependency.vpc.outputs.vpc_id
-  subnet_ids                  = [dependency.vpc.outputs.public_subnets[0]]
-  bastion_security_group      = dependency.sg.outputs.this_security_group_id
-  keys_update_frequency       = "5,20,35,50 * * * *"
-  additional_user_data_script = "date"
+  ebs_volume_size = 0
+  root_volume_size = 8
+  instance_type = "t2.micro"
+  volume_path = "/dev/sdf"
+
+  key_name = dependency.keys.outputs.key_name
+
+  user_data = dependency.user_data.outputs.user_data
+
+  security_groups = [dependency.sg.outputs.this_security_group_id]
+  subnet_id = dependency.vpc.outputs.public_subnets[0]
+
+  instance_profile_id = dependency.iam.outputs.instance_profile_id
+
+  log_config_bucket = dependency.log_config.outputs.log_config_bucket
+  log_config_key = dependency.log_config.outputs.log_config_key
+
+  tags = {}
 }
-
-//inputs = {
-//  subnet_id = dependency.vpc.outputs.public_subnets[0]
-//  ssh_key = "ssh_key_name"
-////  TODO constrict network subnets
-//  internal_networks = [
-//    "10.0.0.0/22"]
-//  disk_size = 10
-//  instance_type = "t2.micro"
-//  project = "ICON"
-//}
