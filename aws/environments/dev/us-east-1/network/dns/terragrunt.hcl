@@ -14,6 +14,9 @@ locals {
   local_source = true
 
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
+
+  account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
+  private_tld = local.account_vars["private_tld"]
 }
 
 dependency "vpc_main" {
@@ -33,9 +36,10 @@ dependency "vpc_support" {
 }
 
 inputs = {
-//  vpc_id = dependency.vpc_main.outputs.vpc_id
-  vpc_ids = [dependency.vpc_main.outputs.vpc_id,
+  vpc_ids = [
     dependency.vpc_mgmt.outputs.vpc_id,
     dependency.vpc_services.outputs.vpc_id,
     dependency.vpc_support.outputs.vpc_id]
+
+  internal_domain_name = local.private_tld
 }
