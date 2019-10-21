@@ -1,9 +1,9 @@
 {
-    "name": "Insight-ICON",
-    "country": "USA",
-    "city": "",
-    "email": "insight.icon.prep@gmail.net",
-    "website": "https://www.insight-icon.net",
-    "details": "https://www.home.insight-icon.net/registration/details.json",
-    "p2pEndpoint": "3.228.90.93:7100"
+    "name": "${name}",
+    "country": "${country}",
+    "city": "${city}",
+    "email": "${email}",
+    "website": "${website}",
+    "details": "${details_endpoint}",
+    "p2pEndpoint": "${p2p_ip}:7100"
 }

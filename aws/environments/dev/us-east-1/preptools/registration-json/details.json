@@ -1,0 +1,28 @@
+{
+  "representative": {
+    "logo": {
+      "logo_256": "${logo_256}",
+      "logo_1024": "${logo_1024}",
+      "logo_svg": "${logo_svg}"
+    },
+    "media": {
+      "steemit": "${steemit}",
+      "twitter": "${twitter}",
+      "youtube": "${youtube}",
+      "facebook": "${facebook}",
+      "github": "${github}",
+      "reddit": "${reddit}",
+      "keybase": "${keybase}",
+      "telegram": "${telegram}",
+      "wechat": "${wechat}"
+    }
+  },
+  "server": {
+    "location": {
+      "country": "${country}",
+      "city":  "${region}"
+    },
+    "server_type": "${server_type}",
+    "api_endpoint": "${p2p_ip}:9000"
+  }
+}
