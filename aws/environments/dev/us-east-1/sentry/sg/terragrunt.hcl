@@ -26,8 +26,7 @@ inputs = {
   vpc_id = dependency.vpc.outputs.vpc_id
 
   ingress_with_cidr_blocks = [
-    //    grpc rules overlayed by another module
-    //    TODO: REMOVE THIS
+    //    TODO: Fix to EIP of NLB + bastion host
     {
       from_port = 7100
       to_port = 7100
@@ -37,7 +36,7 @@ inputs = {
     },
     {
       from_port = 9000
-      to_port = 7100
+      to_port = 9000
       protocol = "tcp"
       description = "grpc ingress"
       cidr_blocks = "0.0.0.0/0"
