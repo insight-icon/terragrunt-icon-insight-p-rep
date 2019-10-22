@@ -9,6 +9,7 @@ include {
 inputs = {
   name = "audit-cloudtrail-${get_aws_account_id()}"
   region = "us-east-1"
+  force_destroy = true
 
 // TODO consider keeping some of this
   namespace = "cp"

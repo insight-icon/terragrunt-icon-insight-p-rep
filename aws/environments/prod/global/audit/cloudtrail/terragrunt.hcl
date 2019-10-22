@@ -1,5 +1,5 @@
 terraform {
-  source = "github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket.git"
+  source = "github.com/cloudposse/terraform-aws-cloudtrail.git?ref=master"
 }
 
 include {
