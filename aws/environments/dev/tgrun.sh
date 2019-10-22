@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# -e : fail as soon as a command errors out 
+# -e : fail as soon as a command errors out
 # -u : unset variables are treated as errors
 # -x : print each command before execution (debug tool)
 # -o pipefail : fail as soon as any command in pipeline errors out
@@ -34,7 +34,7 @@ declare -a STACK
 NUM_STEPS=0
 
 #############################################################################
-# Functions 
+# Functions
 #############################################################################
 
 # Arguments: Dependent commandline utility
@@ -56,9 +56,12 @@ function check_deps() {
 
 	# Check jq which is a dependency
 	check_dep jq
-	
+
 	# Check yq which is a dependency
 	check_dep yq
+
+	# Check kubectl which is a dependency
+	check_dep kubectl
 }
 
 # Arguments: None
@@ -101,7 +104,7 @@ function tg_destroy_step() {
 }
 
 #############################################################################
-# Entry Point 
+# Entry Point
 #############################################################################
 
 # Check dependencies
@@ -114,7 +117,7 @@ check_deps
 CONFIG="$1"
 OPS="$2"
 
-# Required arguments not present. Exit. 
+# Required arguments not present. Exit.
 [[ "${CONFIG}" == "" ]] && show_usage && exit 1
 [[ "${OPS}" == "" ]] && show_usage && exit 1
 
@@ -143,14 +146,32 @@ case "${OPS}" in
 		for (( i = 0 ; i < NUM_STEPS; i++))
 		do
 			show_current_step "${CONFIG}" "${OPS}" "${STACK[i]}"
-			tg_apply_step "${STACK[i]}"
+
+			# As per our current setup, if the STACK entry ends with '.sh', execute the shell
+			# script. This is needed because of the k8s cluster setup is currently done via shell
+			# script calling kubectl.
+			if [[ "${STACK[i]}" =~ \.sh$ ]]
+			then
+				. ./"${STACK[i]}"
+			else
+				tg_apply_step "${STACK[i]}"
+			fi
 		done
 	;;
 	"destroy")
 		for (( i = NUM_STEPS - 1 ; i >= 0; i--))
 		do
 			show_current_step "${CONFIG}" "${OPS}" "${STACK[i]}"
-			tg_destroy_step "${STACK[i]}"
+
+			# As per our current setup, if the STACK entry ends with '.sh', execute the shell
+			# script. This is needed because of the k8s cluster setup is currently done via shell
+			# script calling kubectl.
+			if [[ "${STACK[i]}" =~ \.sh$ ]]
+			then
+				. ./"${STACK[i]}"
+			else
+				tg_destroy_step "${STACK[i]}"
+			fi
 		done
 	;;
 	*)
