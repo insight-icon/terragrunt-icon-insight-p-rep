@@ -4,6 +4,7 @@ DIRECTORIES=( \
 #"global/audit/s3-cloudtrail" \
 #"global/audit/cloudtrail" \
 #"us-east-1/logging/log-config-bucket" \
+#"us-east-1/logging/lb-logging-bucket" \
 #"us-east-1/data" \
 #"us-east-1/network/vpc-main" \
 #"us-east-1/network/vpc-mgmt" \
@@ -18,7 +19,8 @@ DIRECTORIES=( \
 #"us-east-1/bastion/keys" \
 #"us-east-1/bastion/iam" \
 #"us-east-1/bastion/sg" \
-#"us-east-1/bastion/ec2" \
+"us-east-1/bastion/ec2" \
+#"us-east-1/bastion/dns" \
 #"us-east-1/services/ecr" \
 #"us-east-1/services/sg" \
 #"us-east-1/services/eks" \
@@ -39,13 +41,13 @@ DIRECTORIES=( \
 #"us-east-1/p-rep/packer" \
 #"us-east-1/p-rep/ec2" \
 #"us-east-1/p-rep/ec2-configuration" \
-"us-east-1/p-rep/dns-c1" \
-"us-east-1/sentry/packer" \
-"us-east-1/sentry/data" \
-"us-east-1/sentry/sg" \
-"us-east-1/sentry/asg" \
-"us-east-1/network/nlb-sg-grpc" \
-"us-east-1/network/nlb" \
+#"us-east-1/p-rep/dns" \
+#"us-east-1/network/nlb-eip" \
+#"us-east-1/sentry/packer" \
+#"us-east-1/sentry/user-data" \
+#"us-east-1/sentry/sg" \
+#"us-east-1/sentry/asg" \
+#"us-east-1/network/nlb" \
 #"us-east-1/firewalls/lambda-sg-cron-t3" \
 #"us-east-1/bots/rhizome-icon-node-monitor" \
 )
