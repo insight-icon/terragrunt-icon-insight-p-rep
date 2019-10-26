@@ -14,11 +14,15 @@ locals {
   local_source = false
 
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
+
+  environment_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("environment.yaml")}"))
 }
 
 inputs = {
   name = "p-rep"
   distro = "ubuntu-18"
   node = "p-rep"
+
+  environment = local.environment_vars["environment"]
 }
 

@@ -2,7 +2,9 @@ version: '3'
 services:
   citizen:
     image: 'iconloop/citizen-node:1908271151xd2b7a4'
+{% if no_nginx | default(false) %}
     network_mode: host
+{% endif %}
     environment:
       LOG_OUTPUT_TYPE: "file"
       LOOPCHAIN_LOG_LEVEL: "DEBUG"
@@ -14,13 +16,15 @@ services:
     ports:
       - 9000:9000
 
-  loop-logger:
-    image: looploy/fluentd
-    container_name: loop_logger
-    restart: always
-    network_mode: host
-    volumes:
-      - /data/:/loopchain/log
-      - ./fluent/log:/fluentd/log
-    environment:
-      LOG_SERVER_IP: "fluent-agg.us-east-1.aws.patchnotes.xyz"
+{% if log_server_ip is defined %}
+   loop-logger:
+      image: looploy/fluentd
+      container_name: loop_logger
+      restart: always
+      network_mode: host
+      volumes:
+         - ./data/:/loopchain/log
+         - ./fluent/log:/fluentd/log
+      environment:
+         LOG_SERVER_IP: "{{ log_server_ip }}"
+{% endif %}

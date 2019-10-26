@@ -34,6 +34,13 @@ inputs = {
     },
   ]
 
+  computed_ingress_with_self = [
+    {
+      rule = "ssh-tcp"
+      source_security_group_id = "self"
+    }
+  ]
+
   egress_with_cidr_blocks = [
     {
       from_port = 0

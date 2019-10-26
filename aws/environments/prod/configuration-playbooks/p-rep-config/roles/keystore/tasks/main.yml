@@ -1,7 +1,8 @@
 - name: "Copy over the keystore"
   copy:
-    src: "{{ keystore }}" 
-    dest: /home/ubuntu/keys/{{ keystore | basename }}
+    src: "{{ keystore_path }}"
+    dest: /home/ubuntu/cert/{{ keystore_path | basename }}
     mode: '0440'
     owner: "ubuntu"
     group: "ubuntu"
+  when: keystore_path is defined

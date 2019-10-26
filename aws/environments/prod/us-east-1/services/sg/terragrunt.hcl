@@ -31,15 +31,11 @@ inputs = {
 
   computed_ingress_with_source_security_group_id = [
     {
-      rule = "ssh-tcp"
+      rule = "consul-dns-tcp"
       source_security_group_id = dependency.bastion.outputs.this_security_group_id
     },
     {
-      rule = "https-tcp"
-      source_security_group_id = dependency.bastion.outputs.this_security_group_id
-    },
-    {
-      rule = "http-tcp"
+      rule = "consul-dns-udp"
       source_security_group_id = dependency.bastion.outputs.this_security_group_id
     }
   ]
@@ -67,3 +63,17 @@ inputs = {
   // Tags will be filled in later as appropriate
   tags = {}
 }
+
+// TODO: Saving if we want to put EKS in
+//    {
+//      rule = "ssh-tcp"
+//      source_security_group_id = dependency.bastion.outputs.this_security_group_id
+//    },
+//    {
+//      rule = "https-tcp"
+//      source_security_group_id = dependency.bastion.outputs.this_security_group_id
+//    },
+//    {
+//      rule = "http-tcp"
+//      source_security_group_id = dependency.bastion.outputs.this_security_group_id
+//    },

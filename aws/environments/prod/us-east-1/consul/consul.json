@@ -1,0 +1,56 @@
+{
+  "builders": [
+    {
+      "ami_description": "An Ubuntu 18.04 AMI that has Consul installed.",
+      "ami_name": "consul-ubuntu-{{isotime | clean_resource_name}}-{{uuid}}",
+      "associate_public_ip_address": true,
+      "instance_type": "t2.micro",
+      "name": "ubuntu18-ami",
+      "region": "{{user `aws_region`}}",
+      "tags": {
+        "Name": "Packer-Consul"},
+      "source_ami_filter": {
+        "filters": {
+          "architecture": "x86_64",
+          "block-device-mapping.volume-type": "gp2",
+          "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*",
+          "root-device-type": "ebs",
+          "virtualization-type": "hvm"
+        },
+        "most_recent": true,
+        "owners": [
+          "099720109477"
+        ]
+      },
+      "ssh_username": "ubuntu",
+      "type": "amazon-ebs"
+    }
+  ],
+  "min_packer_version": "0.12.0",
+  "provisioners": [
+    {
+      "inline": [
+        "git clone --branch v{{user `consul_branch`}} https://github.com/hashicorp/terraform-aws-consul.git /tmp/terraform-aws-consul",
+        "/tmp/terraform-aws-consul/modules/install-consul/install-consul --version {{user `consul_version`}}"
+      ],
+      "pause_before": "30s",
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "/tmp/terraform-aws-consul/modules/setup-systemd-resolved/setup-systemd-resolved"
+      ],
+      "only": [
+        "ubuntu18-ami"
+      ],
+      "pause_before": "30s",
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "aws_region": "us-east-1",
+    "consul_version": "1.6.1",
+    "consul_branch": "0.7.3",
+    "download_url": "{{env `CONSUL_DOWNLOAD_URL`}}"
+  }
+}

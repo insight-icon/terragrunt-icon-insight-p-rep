@@ -1,3 +1,6 @@
+#TODO: Adapt this to nvme drives
+#github.com/transferwise/ansible-ebs-automatic-nvme-mapping
+
 - name: "Create ext4 filesystem on the EBS data volume /dev/xvdf"
   filesystem:
     fstype: ext4
@@ -10,13 +13,18 @@
     state: mounted
     fstype: ext4
 
-- name: "Copy over the docker-compose file"
-  copy:
+- name: "Render the docker-compose file"
+  template:
     src: ../../../data/docker-compose.yml
     dest: /home/ubuntu/docker-compose.yml
     mode: '0440'
     owner: "ubuntu"
     group: "ubuntu"
+
+- name: "Copy over the nginx conf files"
+  synchronize:
+    src: ../../../data/nginx
+    dest: /home/ubuntu/
 
 - name: "Start node application via docker-compose"
   docker_compose:

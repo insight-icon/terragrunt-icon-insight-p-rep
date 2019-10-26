@@ -8,14 +8,15 @@ include {
 
 locals {
   account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
+  region_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("region.yaml")}"))
 }
 
-dependency "dns-zone" {
+dependency "dns" {
   config_path = "../dns"
 }
 
 inputs = {
-  zone_id = dependency.dns-zone.outputs.zone_id
+  zone_id = dependency.dns.outputs.public_zone_id
   root_domain_name = local.account_vars["domain_name"]
-  region = "{$var.aws_region}"
+  region = local.region_vars["region"]
 }
