@@ -16,12 +16,11 @@ locals {
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
 }
 
-dependency "dns" {
-  config_path = "../../prep/dns"
-}
-
 inputs = {
-  type = "sentry"
-  prep_ip = dependency.dns.outputs.private_fqdn
+  type = "prep"
+  ssh_user = "ubuntu"
+  prometheus_enabled = true
+  consul_enabled = true
+  driver_type = "standard"
 }
 

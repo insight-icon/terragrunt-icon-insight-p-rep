@@ -7,21 +7,22 @@ include {
 }
 
 locals {
-  repo_owner = "insight-infrastructure"
-  repo_name = "terraform-aws-icon-user-data"
+  repo_owner = "robc-io"
+  repo_name = "icon-node-packer-build"
   repo_version = "master"
   repo_path = ""
-  local_source = true
+  local_source = false
 
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
-}
 
-dependency "dns" {
-  config_path = "../../prep/dns"
+  environment_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("environment.yaml")}"))
 }
 
 inputs = {
-  type = "sentry"
-  prep_ip = dependency.dns.outputs.private_fqdn
+  name = "p-rep"
+  distro = "ubuntu-18"
+  node = "p-rep"
+
+  environment = local.environment_vars["environment"]
 }
 

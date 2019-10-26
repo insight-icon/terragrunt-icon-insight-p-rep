@@ -1,3 +1,0 @@
-
-
-Manifests and shell scripts 

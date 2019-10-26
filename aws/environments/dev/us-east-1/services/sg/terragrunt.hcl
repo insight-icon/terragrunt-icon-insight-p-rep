@@ -10,7 +10,6 @@ locals {
   name = "services-sg"
   description = "Security group for support cluster only allowing http(s) / ssh access from bastion"
 
-  common_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("common_vars.yaml")}"))
   account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
 
   coporate_ip = local.account_vars["corporate_ip"]
@@ -32,15 +31,11 @@ inputs = {
 
   computed_ingress_with_source_security_group_id = [
     {
-      rule = "ssh-tcp"
+      rule = "consul-dns-tcp"
       source_security_group_id = dependency.bastion.outputs.this_security_group_id
     },
     {
-      rule = "https-tcp"
-      source_security_group_id = dependency.bastion.outputs.this_security_group_id
-    },
-    {
-      rule = "http-tcp"
+      rule = "consul-dns-udp"
       source_security_group_id = dependency.bastion.outputs.this_security_group_id
     }
   ]
@@ -68,3 +63,17 @@ inputs = {
   // Tags will be filled in later as appropriate
   tags = {}
 }
+
+// TODO: Saving if we want to put EKS in
+//    {
+//      rule = "ssh-tcp"
+//      source_security_group_id = dependency.bastion.outputs.this_security_group_id
+//    },
+//    {
+//      rule = "https-tcp"
+//      source_security_group_id = dependency.bastion.outputs.this_security_group_id
+//    },
+//    {
+//      rule = "http-tcp"
+//      source_security_group_id = dependency.bastion.outputs.this_security_group_id
+//    },

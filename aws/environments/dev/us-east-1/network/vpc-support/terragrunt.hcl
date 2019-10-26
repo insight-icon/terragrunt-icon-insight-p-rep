@@ -6,6 +6,11 @@ include {
   path = find_in_parent_folders()
 }
 
+locals {
+  region_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("region.yaml")}"))
+  azs = local.region_vars["azs"]
+}
+
 inputs = {
   name = "support-vpc"
 
@@ -15,10 +20,7 @@ inputs = {
   enable_dns_hostnames = true
   enable_dns_support = true
 
-  azs = [
-    "us-east-1a",
-    "us-east-1b",
-    "us-east-1c"]
+  azs = local.azs
 
   cidr = "172.24.0.0/16"
 

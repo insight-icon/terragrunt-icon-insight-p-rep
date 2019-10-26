@@ -1,4 +1,4 @@
-terraform {
+ terraform {
   source = "github.com/terraform-aws-modules/terraform-aws-autoscaling.git"
 }
 
@@ -14,27 +14,27 @@ dependency "sg" {
   config_path = "../sg"
 }
 
-//dependency "packer" {
-//  config_path = "../packer"
-//}
+dependency "packer" {
+  config_path = "../packer"
+}
 
 dependency "user_data" {
   config_path = "../user-data"
 }
 
-
 inputs = {
   name = "sentry"
   spot_price = "1"
 
-  //  user_data = dependency.data.outputs.sentry_user_data
-  key_name = "p-rep"
+  user_data = dependency.user_data.outputs.user_data
+
+  key_name = "prep"
 
   # Launch configuration
   lc_name = "prep-sentry-lc"
 
-//  image_id = dependency.packer.outputs.ami_id
-  image_id = "ami-03ea8cda9c30531fa"
+  image_id = dependency.packer.outputs.ami_id
+//  image_id = "ami-03ea8cda9c30531fa"
   instance_type = "c4.large"
   security_groups = [
     dependency.sg.outputs.this_security_group_id]
@@ -62,12 +62,10 @@ inputs = {
   tags = [
     {
       key = "Environment"
-      value = "dev"
+      value = "prod"
       propagate_at_launch = true
     }
   ]
-
-  user_data = dependency.user_data.outputs.user_data
 }
 
 //    user_data = <<-EOF
