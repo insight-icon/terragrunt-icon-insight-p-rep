@@ -22,6 +22,9 @@ _old/
 
 !docs/environment/account.tfvars
 
+log.txt
+
+./_old
 
 /aws/modules/terraform-aws-icon-p-rep-keys/
 /aws/modules/terraform-aws-icon-citizen-node/
