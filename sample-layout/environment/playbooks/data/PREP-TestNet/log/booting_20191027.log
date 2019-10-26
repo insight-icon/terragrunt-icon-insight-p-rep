@@ -1,0 +1,19 @@
+[2019-10-27 04:20:33.986] Your IP: 24.5.107.162 
+[2019-10-27 04:20:33.993] RPC_PORT: 9000 / RPC_WORKER: 3  
+[2019-10-27 04:20:33.998] DEFAULT_PATH=/data/PREP-TestNet in Docker Container 
+[2019-10-27 04:20:34.002] DEFAULT_LOG_PATH=/data/PREP-TestNet/log 
+[2019-10-27 04:20:34.009] DEFAULT_STORAGE_PATH=/data/PREP-TestNet/.storage 
+[2019-10-27 04:20:34.014] scoreRootPath=/data/PREP-TestNet/.score_data/score 
+[2019-10-27 04:20:34.019] stateDbRootPath=/data/PREP-TestNet/.score_data/db 
+[2019-10-27 04:20:34.024] Time synchronization with NTP / NTP SERVER: time.google.com 
+[2019-10-27 04:20:42.893] GENESIS_DATA_PATH=/prep_peer/conf/genesis.json 
+[2019-10-27 04:20:42.898] P-REP package version info - _1910211829xc2286d 
+[2019-10-27 04:20:43.304] iconcommons             1.1.2    
+iconrpcserver           1.4.5    
+iconsdk                 1.2.0    
+iconservice             1.5.15   
+loopchain               2.4.15    
+[2019-10-27 04:20:43.308] NETWORK_ENV=PREP-TestNet, SERVICE=zicon, ENDPOINT_URL=https://zicon.net.solidwallet.io, SERVICE_API = https://zicon.net.solidwallet.io/api/v3 
+[2019-10-27 04:20:44.057] [ERROR] Download Failed - https://download.solidwallet.io/cert/24.5.107.162_private.der status_code=403  
+[2019-10-27 04:20:44.061] [ERROR] Unauthorized IP address, Please contact our support team 
+[2019-10-27 04:20:44.065] [ERROR] Your External IP:24.5.107.162 / Your Enviroment IPADDR:24.5.107.162 

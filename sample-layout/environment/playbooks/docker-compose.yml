@@ -1,0 +1,29 @@
+version: '3'
+services:
+  nginx:
+    depends_on:
+      - prep
+    image: 'nginx:1.17.3'
+    container_name: 'nginx'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/log/:/var/log/nginx/
+    ports:
+      - 9000:9000
+    external_links:
+      - prep
+    restart: always
+  prep:
+    image: 'iconloop/prep-node:1910211829xc2286d'
+    container_name: "prep"
+    environment:
+      LOG_OUTPUT_TYPE: "file"
+      LOOPCHAIN_LOG_LEVEL: "DEBUG"
+      FASTEST_START: "yes"     # Restore from lastest snapshot DB
+    cap_add:
+      - SYS_TIME
+    volumes:
+      - ./data:/data
+      - ./keys:/citizen_pack/keys  # Automatically generate cert key files here
+    ports:
+      - '9000'
