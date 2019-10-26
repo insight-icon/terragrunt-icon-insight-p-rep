@@ -1,1 +1,4 @@
-coporate_ip: "112.152.203.211/32"
+environment: dev
+stage: "dev"
+node_subdomain: "dev"
+log_bucket_region: "us-east-1"

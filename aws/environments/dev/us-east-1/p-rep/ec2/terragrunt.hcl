@@ -16,6 +16,7 @@ locals {
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
 
   account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
+  region_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("region.yaml")}"))
 }
 
 dependency "iam" {
@@ -46,6 +47,8 @@ inputs = {
   root_volume_size = "20"
   instance_type = "c4.xlarge"
   volume_path = "/dev/sdf"
+
+  availability_zone = local.region_vars["azs"][0]
 
   key_name = dependency.keys.outputs.key_name
   public_key = dependency.keys.outputs.public_key

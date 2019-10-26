@@ -17,11 +17,11 @@ locals {
 }
 
 dependency "dns" {
-  config_path = "../../p-rep/dns"
+  config_path = "../dns"
 }
 
 inputs = {
-  type = "sentry"
-  prep_ip = dependency.dns.outputs.private_fqdn
+  type = "citizen"
+  prep_ip = dependency.prep_dns.outputs.private_fqdn
 }
 

@@ -47,9 +47,9 @@ inputs = {
   ami_id = dependency.packer.outputs.ami_id
 
   volume_dir = ""
-  ebs_volume_size = 100
+  ebs_volume_size = 120
   root_volume_size = "20"
-  instance_type = "c4.2xlarge"
+  instance_type = "c4.xlarge"
   volume_path = "/dev/sdf"
 
   key_name = dependency.keys.outputs.key_name

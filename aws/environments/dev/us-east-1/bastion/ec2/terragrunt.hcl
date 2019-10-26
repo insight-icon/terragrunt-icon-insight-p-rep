@@ -16,6 +16,8 @@ locals {
   source = local.local_source ? "../../../../../modules/${local.repo_name}" : "github.com/${local.repo_owner}/${local.repo_name}.git//${local.repo_path}?ref=${local.repo_version}"
 
   account_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("account.yaml")}"))
+  environment_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("environment.yaml")}"))
+  region_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("region.yaml")}"))
 }
 
 dependency "iam" {
@@ -47,6 +49,9 @@ inputs = {
   name = "bastion"
 
   create_eip = true
+
+  environment = local.environment_vars["environment"]
+  availability_zone = local.region_vars["azs"][0]
 
   ebs_volume_size = 0
   root_volume_size = 8

@@ -12,7 +12,7 @@ dependency "dns-zone" {
 
 inputs = {
 
-  zone_id = dependency.dns-zone.outputs.zone_id
+  zone_id = dependency.dns-zone.outputs.public_zone_id
   root_domain_name = "aws.patchnotes.xyz"
   region = "{$var.aws_region}"
 

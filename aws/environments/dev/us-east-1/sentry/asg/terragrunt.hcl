@@ -14,9 +14,9 @@ dependency "sg" {
   config_path = "../sg"
 }
 
-dependency "packer" {
-  config_path = "../packer"
-}
+//dependency "packer" {
+//  config_path = "../packer"
+//}
 
 dependency "user_data" {
   config_path = "../user-data"
@@ -33,7 +33,8 @@ inputs = {
   # Launch configuration
   lc_name = "prep-sentry-lc"
 
-  image_id = dependency.packer.outputs.ami_id
+//  image_id = dependency.packer.outputs.ami_id
+  image_id = "ami-03ea8cda9c30531fa"
   instance_type = "c4.large"
   security_groups = [
     dependency.sg.outputs.this_security_group_id]
